@@ -7,15 +7,34 @@
     <style>
       :root {
         color-scheme: light;
-        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          sans-serif;
         background: #f5f7fb;
         color: #11203b;
       }
-      * { box-sizing: border-box; }
-      body { margin: 0; }
-      a { color: #2459d3; text-decoration: none; }
-      a:hover { text-decoration: underline; }
-      code, pre { font-family: "SFMono-Regular", ui-monospace, SFMono-Regular, Menlo, monospace; }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+      }
+      a {
+        color: #2459d3;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      code,
+      pre {
+        font-family: 'SFMono-Regular', ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
       .layout {
         display: grid;
         grid-template-columns: minmax(16rem, 22rem) minmax(0, 1fr);
@@ -33,7 +52,8 @@
       .content {
         padding: 2rem;
       }
-      .panel, .item {
+      .panel,
+      .item {
         background: #ffffff;
         border: 1px solid #d8dfec;
         border-radius: 0.9rem;
@@ -57,14 +77,25 @@
         border: 1px solid #c7d2e5;
         margin: 1rem 0 1.5rem;
       }
-      .nav-list, .meta-list {
+      .nav-list,
+      .meta-list {
         list-style: none;
         padding: 0;
         margin: 0;
       }
-      .nav-list li + li { margin-top: 0.8rem; }
-      .muted { color: #5e6d8c; }
-      .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0; list-style: none; }
+      .nav-list li + li {
+        margin-top: 0.8rem;
+      }
+      .muted {
+        color: #5e6d8c;
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        padding: 0;
+        list-style: none;
+      }
       .chip {
         border-radius: 999px;
         background: #e8eefb;
@@ -72,8 +103,18 @@
         padding: 0.25rem 0.65rem;
         font-size: 0.85rem;
       }
-      table { width: 100%; border-collapse: collapse; margin-top: 0.8rem; }
-      th, td { padding: 0.6rem; border-bottom: 1px solid #e2e7f2; text-align: left; vertical-align: top; }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 0.8rem;
+      }
+      th,
+      td {
+        padding: 0.6rem;
+        border-bottom: 1px solid #e2e7f2;
+        text-align: left;
+        vertical-align: top;
+      }
       pre {
         overflow: auto;
         border-radius: 0.75rem;
@@ -81,13 +122,34 @@
         color: #e7edf7;
         padding: 1rem;
       }
-      .empty { font-style: italic; color: #6f7f9c; }
-      .mermaid { margin: 1rem 0; overflow: auto; }
-      details > summary { cursor: pointer; color: #5e6d8c; font-size: 0.9rem; margin-top: 0.5rem; user-select: none; }
+      .empty {
+        font-style: italic;
+        color: #6f7f9c;
+      }
+      .mermaid {
+        margin: 1rem 0;
+        overflow: auto;
+      }
+      details > summary {
+        cursor: pointer;
+        color: #5e6d8c;
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+        user-select: none;
+      }
       @media (max-width: 900px) {
-        .layout { grid-template-columns: 1fr; }
-        .sidebar { position: static; max-height: none; border-right: 0; border-bottom: 1px solid #d8dfec; }
-        .content { padding: 1rem; }
+        .layout {
+          grid-template-columns: 1fr;
+        }
+        .sidebar {
+          position: static;
+          max-height: none;
+          border-right: 0;
+          border-bottom: 1px solid #d8dfec;
+        }
+        .content {
+          padding: 1rem;
+        }
       }
     </style>
   </head>
@@ -97,10 +159,13 @@
         <p class="muted">Generated with Paradox</p>
         <h1>@ankhorage/supabase-storage</h1>
         <p>Type-safe Supabase Storage adapter for uploads, public URLs, and asset metadata.</p>
-        <input id="search" class="search" type="search" placeholder="Search symbols, files, and metadata" />
-        <ul class="nav-list">
-          
-        </ul>
+        <input
+          id="search"
+          class="search"
+          type="search"
+          placeholder="Search symbols, files, and metadata"
+        />
+        <ul class="nav-list"></ul>
       </aside>
       <main class="content">
         <section class="panel">
@@ -119,15 +184,14 @@
         <section class="panel">
           <h2>Modules</h2>
           <article class="item" data-search="src/index.ts">
-    <h3>src/index.ts</h3>
-    <p class="muted">Configured entrypoint</p>
-    <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
-    <p><strong>Exports:</strong> <span class="empty">None</span></p>
-  </article>
+            <h3>src/index.ts</h3>
+            <p class="muted">Configured entrypoint</p>
+            <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
+            <p><strong>Exports:</strong> <span class="empty">None</span></p>
+          </article>
         </section>
         <section class="panel">
           <h2>Exports by module</h2>
-          
         </section>
         <section class="panel">
           <h2>Component registry</h2>
@@ -135,65 +199,77 @@
         </section>
         <section class="panel">
           <h2>Diagrams</h2>
-          <article class="item" data-search="Architecture overview diagrams/architecture-overview.mmd">
-    <h3>Architecture overview</h3>
-    <p class="muted"><code>diagrams/architecture-overview.mmd</code></p>
-    <div class="mermaid">graph TD
+          <article
+            class="item"
+            data-search="Architecture overview diagrams/architecture-overview.mmd"
+          >
+            <h3>Architecture overview</h3>
+            <p class="muted"><code>diagrams/architecture-overview.mmd</code></p>
+            <div class="mermaid">
+              graph TD package__ankhorage_supabase_storage[&quot;@ankhorage/supabase-storage&quot;]
+              entrypoint_src_index_ts[&quot;src/index.ts&quot;] package__ankhorage_supabase_storage
+              --&gt; entrypoint_src_index_ts module_src_index_ts[&quot;src/index.ts&quot;]
+            </div>
+            <details>
+              <summary>View Mermaid source</summary>
+              <pre>
+graph TD
   package__ankhorage_supabase_storage[&quot;@ankhorage/supabase-storage&quot;]
   entrypoint_src_index_ts[&quot;src/index.ts&quot;]
   package__ankhorage_supabase_storage --&gt; entrypoint_src_index_ts
   module_src_index_ts[&quot;src/index.ts&quot;]
-</div>
-    <details>
-      <summary>View Mermaid source</summary>
-      <pre>graph TD
-  package__ankhorage_supabase_storage[&quot;@ankhorage/supabase-storage&quot;]
-  entrypoint_src_index_ts[&quot;src/index.ts&quot;]
-  package__ankhorage_supabase_storage --&gt; entrypoint_src_index_ts
+</pre
+              >
+            </details>
+          </article>
+          <article
+            class="item"
+            data-search="Module relationships diagrams/module-relationships.mmd"
+          >
+            <h3>Module relationships</h3>
+            <p class="muted"><code>diagrams/module-relationships.mmd</code></p>
+            <div class="mermaid">graph LR module_src_index_ts[&quot;src/index.ts&quot;]</div>
+            <details>
+              <summary>View Mermaid source</summary>
+              <pre>
+graph LR
   module_src_index_ts[&quot;src/index.ts&quot;]
-</pre>
-    </details>
-  </article><article class="item" data-search="Module relationships diagrams/module-relationships.mmd">
-    <h3>Module relationships</h3>
-    <p class="muted"><code>diagrams/module-relationships.mmd</code></p>
-    <div class="mermaid">graph LR
+</pre
+              >
+            </details>
+          </article>
+          <article class="item" data-search="Export graph diagrams/export-graph.mmd">
+            <h3>Export graph</h3>
+            <p class="muted"><code>diagrams/export-graph.mmd</code></p>
+            <div class="mermaid">graph LR module_src_index_ts[&quot;src/index.ts&quot;]</div>
+            <details>
+              <summary>View Mermaid source</summary>
+              <pre>
+graph LR
   module_src_index_ts[&quot;src/index.ts&quot;]
-</div>
-    <details>
-      <summary>View Mermaid source</summary>
-      <pre>graph LR
-  module_src_index_ts[&quot;src/index.ts&quot;]
-</pre>
-    </details>
-  </article><article class="item" data-search="Export graph diagrams/export-graph.mmd">
-    <h3>Export graph</h3>
-    <p class="muted"><code>diagrams/export-graph.mmd</code></p>
-    <div class="mermaid">graph LR
-  module_src_index_ts[&quot;src/index.ts&quot;]
-</div>
-    <details>
-      <summary>View Mermaid source</summary>
-      <pre>graph LR
-  module_src_index_ts[&quot;src/index.ts&quot;]
-</pre>
-    </details>
-  </article><article class="item" data-search="Entrypoint sequence diagrams/entrypoint-sequence.mmd">
-    <h3>Entrypoint sequence</h3>
-    <p class="muted"><code>diagrams/entrypoint-sequence.mmd</code></p>
-    <div class="mermaid">sequenceDiagram
+</pre
+              >
+            </details>
+          </article>
+          <article class="item" data-search="Entrypoint sequence diagrams/entrypoint-sequence.mmd">
+            <h3>Entrypoint sequence</h3>
+            <p class="muted"><code>diagrams/entrypoint-sequence.mmd</code></p>
+            <div class="mermaid">
+              sequenceDiagram participant participant_src_index_ts as src/index.ts participant
+              participant__ankhorage_supabase_storage as @ankhorage/supabase-storage Note over
+              participant__ankhorage_supabase_storage: No internal module relationships detected.
+            </div>
+            <details>
+              <summary>View Mermaid source</summary>
+              <pre>
+sequenceDiagram
 participant participant_src_index_ts as src/index.ts
   participant participant__ankhorage_supabase_storage as @ankhorage/supabase-storage
   Note over participant__ankhorage_supabase_storage: No internal module relationships detected.
-</div>
-    <details>
-      <summary>View Mermaid source</summary>
-      <pre>sequenceDiagram
-participant participant_src_index_ts as src/index.ts
-  participant participant__ankhorage_supabase_storage as @ankhorage/supabase-storage
-  Note over participant__ankhorage_supabase_storage: No internal module relationships detected.
-</pre>
-    </details>
-  </article>
+</pre
+              >
+            </details>
+          </article>
         </section>
       </main>
     </div>

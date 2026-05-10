@@ -18,7 +18,9 @@
   "keywords": [
     "supabase"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "@supabase/supabase-js": "^2.105.3"
+  },
   "files": [
     "dist",
     "src",

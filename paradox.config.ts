@@ -5,8 +5,7 @@ export default defineParadoxConfig({
 
   docs: {
     title: '@ankhorage/supabase-storage',
-    description:
-      'Type-safe Supabase Storage adapter for uploads, public URLs, and asset metadata.'
+    description: 'Type-safe Supabase Storage adapter for uploads, public URLs, and asset metadata.',
   },
 
   package: {
