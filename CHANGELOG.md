@@ -1,5 +1,11 @@
 # @ankhorage/supabase-storage
 
+## 0.1.1
+
+### Patch Changes
+
+- 9aaac0a: Update packages
+
 ## 0.1.0
 
 ### Minor Changes
