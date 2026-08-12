@@ -1,5 +1,11 @@
 # @ankhorage/supabase-storage
 
+## 0.2.0
+
+### Minor Changes
+
+- dc94ac5: Add Supabase object listing and signed URL operations plus an optional `@ankhorage/contracts` bridge that implements the canonical `MediaStorageAdapter` for app-authoring media.
+
 ## 0.1.1
 
 ### Patch Changes
