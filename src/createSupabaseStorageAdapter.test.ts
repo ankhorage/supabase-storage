@@ -30,6 +30,12 @@ describe('createSupabaseStorageAdapter', () => {
       error: { code: 'invalid_config', message: 'Supabase Storage URL is required.' },
     });
 
+    const list = await adapter.list({});
+    expect(list).toEqual({
+      ok: false,
+      error: { code: 'invalid_config', message: 'Supabase Storage URL is required.' },
+    });
+
     expect(calls).toHaveLength(0);
   });
 
@@ -141,6 +147,82 @@ describe('createSupabaseStorageAdapter', () => {
     expect(supabase.bucket.removeCalls).toEqual([[['a/b/c.png']]]);
   });
 
+  it('lists normalized file metadata with opaque offset cursors', async () => {
+    const calls: CreateClientCall[] = [];
+    const supabase = createSupabaseClientStub();
+    supabase.bucket.listResponse = {
+      data: [
+        {
+          id: 'file-1',
+          name: 'hero.png',
+          created_at: '2026-08-12T07:00:00.000Z',
+          updated_at: '2026-08-12T07:01:00.000Z',
+          metadata: { mimetype: 'image/png', size: 4096, eTag: 'etag-1' },
+        },
+        { id: null, name: 'nested', created_at: null, updated_at: null, metadata: null },
+      ],
+      error: null,
+    };
+    mockSupabaseModule({ calls, supabase });
+
+    const { createSupabaseStorageAdapter } = await import('./createSupabaseStorageAdapter.js');
+    const adapter = createSupabaseStorageAdapter({
+      url: 'https://example.supabase.co',
+      anonKey: 'anon',
+      bucket: 'media',
+    });
+
+    const result = await adapter.list({ prefix: '/authoring/', cursor: '4', limit: 2 });
+
+    expect(result).toEqual({
+      ok: true,
+      data: {
+        assets: [
+          {
+            bucket: 'media',
+            path: 'authoring/hero.png',
+            contentType: 'image/png',
+            size: 4096,
+            createdAt: '2026-08-12T07:00:00.000Z',
+            updatedAt: '2026-08-12T07:01:00.000Z',
+            etag: 'etag-1',
+          },
+        ],
+        nextCursor: '6',
+      },
+    });
+    expect(supabase.bucket.listCalls).toEqual([
+      ['authoring', { limit: 2, offset: 4, sortBy: { column: 'name', order: 'asc' } }],
+    ]);
+  });
+
+  it('creates signed URLs with validated expiry', async () => {
+    const calls: CreateClientCall[] = [];
+    const supabase = createSupabaseClientStub();
+    mockSupabaseModule({ calls, supabase });
+
+    const { createSupabaseStorageAdapter } = await import('./createSupabaseStorageAdapter.js');
+    const adapter = createSupabaseStorageAdapter({
+      url: 'https://example.supabase.co',
+      anonKey: 'anon',
+      bucket: 'media',
+    });
+
+    const result = await adapter.createSignedUrl({ path: '/hero.png', expiresInSeconds: 600 });
+
+    expect(result).toEqual({
+      ok: true,
+      data: {
+        asset: {
+          bucket: 'media',
+          path: 'hero.png',
+          signedUrl: 'https://signed.example/hero.png',
+        },
+      },
+    });
+    expect(supabase.bucket.createSignedUrlCalls).toEqual([['hero.png', 600]]);
+  });
+
   it('normalizes provider errors and thrown errors', async () => {
     const calls: CreateClientCall[] = [];
     const supabase = createSupabaseClientStub();
@@ -194,8 +276,12 @@ interface BucketApiStub {
   ][];
   removeCalls: [string[]][];
   getPublicUrlCalls: [string][];
+  listCalls: [string, { limit: number; offset: number; sortBy: { column: string; order: string } }][];
+  createSignedUrlCalls: [string, number][];
   uploadResponse: ProviderResponse;
   removeResponse: ProviderResponse;
+  listResponse: ProviderResponse;
+  signedUrlResponse: ProviderResponse;
   removeThrows: Error | null;
   upload(
     path: string,
@@ -204,6 +290,11 @@ interface BucketApiStub {
   ): Promise<ProviderResponse>;
   remove(paths: string[]): Promise<ProviderResponse>;
   getPublicUrl(path: string): { data: { publicUrl: string } };
+  list(
+    prefix: string,
+    options: { limit: number; offset: number; sortBy: { column: string; order: string } },
+  ): Promise<ProviderResponse>;
+  createSignedUrl(path: string, expiresInSeconds: number): Promise<ProviderResponse>;
 }
 
 interface SupabaseClientStub {
@@ -222,8 +313,12 @@ function createSupabaseClientStub(): SupabaseClientStub {
     uploadCalls: [],
     removeCalls: [],
     getPublicUrlCalls: [],
+    listCalls: [],
+    createSignedUrlCalls: [],
     uploadResponse: { data: { path: 'ignored' }, error: null },
     removeResponse: { data: [], error: null },
+    listResponse: { data: [], error: null },
+    signedUrlResponse: { data: { signedUrl: 'https://signed.example/hero.png' }, error: null },
     removeThrows: null,
     upload(path, body, options) {
       bucket.uploadCalls.push([path, body, options]);
@@ -239,6 +334,14 @@ function createSupabaseClientStub(): SupabaseClientStub {
     getPublicUrl(path) {
       bucket.getPublicUrlCalls.push([path]);
       return { data: { publicUrl: `https://cdn.example/public/${currentBucket}/${path}` } };
+    },
+    list(prefix, options) {
+      bucket.listCalls.push([prefix, options]);
+      return Promise.resolve(bucket.listResponse);
+    },
+    createSignedUrl(path, expiresInSeconds) {
+      bucket.createSignedUrlCalls.push([path, expiresInSeconds]);
+      return Promise.resolve(bucket.signedUrlResponse);
     },
   };
 
