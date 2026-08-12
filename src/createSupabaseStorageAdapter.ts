@@ -2,8 +2,8 @@ import { createClient } from '@supabase/supabase-js';
 
 import { createStorageError, mapNetworkError, mapProviderError } from './errors.js';
 import type {
-  ListInput,
   ListedAssetMetadata,
+  ListInput,
   ListResult,
   PublicUrlInput,
   PublicUrlResult,
@@ -222,9 +222,7 @@ export function createSupabaseStorageAdapter(
           .map((item) => normalizeListedAsset(item, bucketResult.data, prefix))
           .filter((item): item is ListedAssetMetadata => item !== null);
         const nextCursor =
-          data.length < limitResult.data
-            ? undefined
-            : String(offsetResult.data + limitResult.data);
+          data.length < limitResult.data ? undefined : String(offsetResult.data + limitResult.data);
 
         return {
           ok: true,
@@ -344,7 +342,10 @@ function normalizeListLimit(value: number | undefined): StorageResult<number> {
     ? { ok: true, data: limit }
     : {
         ok: false,
-        error: createStorageError('validation_error', 'Storage list limit must be a positive integer.'),
+        error: createStorageError(
+          'validation_error',
+          'Storage list limit must be a positive integer.',
+        ),
       };
 }
 

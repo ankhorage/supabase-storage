@@ -276,7 +276,10 @@ interface BucketApiStub {
   ][];
   removeCalls: [string[]][];
   getPublicUrlCalls: [string][];
-  listCalls: [string, { limit: number; offset: number; sortBy: { column: string; order: string } }][];
+  listCalls: [
+    string,
+    { limit: number; offset: number; sortBy: { column: string; order: string } },
+  ][];
   createSignedUrlCalls: [string, number][];
   uploadResponse: ProviderResponse;
   removeResponse: ProviderResponse;

@@ -41,9 +41,7 @@ export function toMediaStorageAdapter(adapter: SupabaseStorageAdapter): MediaSto
 
     async publicUrl(input) {
       const result = await adapter.publicUrl({ bucket: input.bucket, path: input.path });
-      return result.ok
-        ? { ok: true, data: { publicUrl: result.data.asset.publicUrl } }
-        : result;
+      return result.ok ? { ok: true, data: { publicUrl: result.data.asset.publicUrl } } : result;
     },
 
     async list(input) {
