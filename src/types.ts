@@ -40,6 +40,19 @@ export interface PublicUrlInput {
   path: string;
 }
 
+export interface ListInput {
+  bucket?: string;
+  prefix?: string;
+  cursor?: string;
+  limit?: number;
+}
+
+export interface SignedUrlInput {
+  bucket?: string;
+  path: string;
+  expiresInSeconds: number;
+}
+
 export interface AssetMetadata {
   bucket: string;
   path: string;
@@ -47,6 +60,16 @@ export interface AssetMetadata {
   contentType: string | null;
   cacheControl: string | null;
   size: number;
+}
+
+export interface ListedAssetMetadata {
+  bucket: string;
+  path: string;
+  contentType: string | null;
+  size: number | null;
+  createdAt: string | null;
+  updatedAt: string | null;
+  etag: string | null;
 }
 
 export interface UploadResult {
@@ -64,9 +87,24 @@ export interface PublicUrlResult {
   asset: Pick<AssetMetadata, 'bucket' | 'path' | 'publicUrl'>;
 }
 
+export interface ListResult {
+  assets: readonly ListedAssetMetadata[];
+  nextCursor?: string;
+}
+
+export interface SignedUrlResult {
+  asset: {
+    bucket: string;
+    path: string;
+    signedUrl: string;
+  };
+}
+
 export interface SupabaseStorageAdapter {
   upload(input: UploadInput): Promise<StorageResult<UploadResult>>;
   remove(input: RemoveInput): Promise<StorageResult<RemoveResult>>;
   publicUrl(input: PublicUrlInput): Promise<StorageResult<PublicUrlResult>>;
   getPublicUrl(input: PublicUrlInput): Promise<StorageResult<PublicUrlResult>>;
+  list(input: ListInput): Promise<StorageResult<ListResult>>;
+  createSignedUrl(input: SignedUrlInput): Promise<StorageResult<SignedUrlResult>>;
 }
