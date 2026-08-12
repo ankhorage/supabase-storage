@@ -2,7 +2,7 @@
   "name": "@ankhorage/supabase-storage",
   "type": "module",
   "version": "0.1.1",
-  "description": "Type-safe Supabase Storage adapter for uploads, public URLs, and asset metadata.",
+  "description": "Type-safe Supabase Storage adapter for uploads, listing, URL resolution, and asset metadata.",
   "homepage": "https://github.com/ankhorage/supabase-storage#readme",
   "bugs": {
     "url": "https://github.com/ankhorage/supabase-storage/issues"
@@ -26,6 +26,14 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.105.3"
   },
+  "peerDependencies": {
+    "@ankhorage/contracts": "^7.4.0"
+  },
+  "peerDependenciesMeta": {
+    "@ankhorage/contracts": {
+      "optional": true
+    }
+  },
   "files": [
     "dist",
     "src",
@@ -39,6 +47,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
+    },
+    "./contracts": {
+      "types": "./dist/contracts/index.d.ts",
+      "import": "./dist/contracts/index.js",
+      "default": "./dist/contracts/index.js"
     },
     "./package.json": "./package.json"
   },
@@ -61,6 +74,7 @@
     "version-packages": "changeset version"
   },
   "devDependencies": {
+    "@ankhorage/contracts": "^7.4.0",
     "@ankhorage/devtools": "^1.0.6",
     "@ankhorage/paradox": "^0.1.7",
     "@changesets/cli": "^2.31.0",
