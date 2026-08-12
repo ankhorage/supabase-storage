@@ -17,7 +17,7 @@ export function mapProviderError(operation: string, providerError: unknown): Sto
   return createStorageError('provider_error', message, { operation, error: providerError });
 }
 
-export function extractErrorMessage(value: unknown): string | undefined {
+function extractErrorMessage(value: unknown): string | undefined {
   if (typeof value === 'string' && value.length > 0) {
     return value;
   }
