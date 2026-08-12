@@ -2,7 +2,7 @@
 
 ![license: MIT](././paradox/badges/license.svg) ![npm: v1.0.10](././paradox/badges/npm.svg) ![runtime: bun](././paradox/badges/runtime.svg) ![typescript: strict](././paradox/badges/typescript.svg) ![eslint: checked](././paradox/badges/eslint.svg) ![prettier: checked](././paradox/badges/prettier.svg) ![build: checked](././paradox/badges/build.svg) ![tests: checked](././paradox/badges/tests.svg) ![docs: paradox](././paradox/badges/docs.svg)
 
-Type-safe Supabase Storage adapter for uploads, public URLs, and asset metadata.
+Type-safe Supabase Storage adapter for uploads, listing, URL resolution, and asset metadata.
 
 ## Usage (standalone)
 
@@ -42,6 +42,27 @@ Browser note (conversion only; not part of the adapter API):
 ```ts
 const bytes = new Uint8Array(await file.arrayBuffer());
 ```
+
+## Ankhorage media-storage bridge
+
+Projects that use `@ankhorage/contracts` can opt into the canonical media-storage capability through the explicit bridge subpath. The root package remains contracts-independent.
+
+```ts
+import { createContractsSupabaseStorageAdapter } from '@ankhorage/supabase-storage/contracts';
+
+const mediaStorage = createContractsSupabaseStorageAdapter({
+  url: process.env.SUPABASE_URL ?? '',
+  anonKey: process.env.SUPABASE_KEY ?? '',
+});
+
+const resolved = await mediaStorage.resolve({
+  storageId: 'primary',
+  bucket: 'media',
+  path: 'authoring/hero.png',
+});
+```
+
+The bridge implements the provider-neutral `MediaStorageAdapter`. Upload results retain stable storage identity (`storageId`/`bucket`/`path`), while readable URLs are resolved on demand. Resolution defaults to a signed URL; public resolution must be requested explicitly.
 
 ## Generated documentation
 
