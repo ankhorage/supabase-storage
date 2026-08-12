@@ -218,11 +218,11 @@ export function createSupabaseStorageAdapter(
           return { ok: false, error: mapProviderError('list', error) };
         }
 
-        const assets = (data ?? [])
+        const assets = data
           .map((item) => normalizeListedAsset(item, bucketResult.data, prefix))
           .filter((item): item is ListedAssetMetadata => item !== null);
         const nextCursor =
-          (data?.length ?? 0) < limitResult.data
+          data.length < limitResult.data
             ? undefined
             : String(offsetResult.data + limitResult.data);
 
