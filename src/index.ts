@@ -1,10 +1,15 @@
 export { createSupabaseStorageAdapter } from './createSupabaseStorageAdapter.js';
 export type {
   AssetMetadata,
+  ListedAssetMetadata,
+  ListInput,
+  ListResult,
   PublicUrlInput,
   PublicUrlResult,
   RemoveInput,
   RemoveResult,
+  SignedUrlInput,
+  SignedUrlResult,
   StorageAdapterError,
   StorageAdapterErrorCode,
   StorageResult,
