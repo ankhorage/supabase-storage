@@ -27,7 +27,7 @@
     "@supabase/supabase-js": "^2.105.3"
   },
   "peerDependencies": {
-    "@ankhorage/contracts": "^7.4.0"
+    "@ankhorage/contracts": "^8.0.0"
   },
   "peerDependenciesMeta": {
     "@ankhorage/contracts": {
@@ -74,7 +74,7 @@
     "version-packages": "changeset version"
   },
   "devDependencies": {
-    "@ankhorage/contracts": "^7.4.0",
+    "@ankhorage/contracts": "^8.0.0",
     "@ankhorage/devtools": "^1.0.6",
     "@ankhorage/paradox": "^0.1.7",
     "@changesets/cli": "^2.31.0",
