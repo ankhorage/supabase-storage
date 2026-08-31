@@ -1,11 +1,7 @@
 export type StorageResult<T> = { ok: true; data: T } | { ok: false; error: StorageAdapterError };
 
 export type StorageAdapterErrorCode =
-  | 'invalid_config'
-  | 'missing_bucket'
-  | 'validation_error'
-  | 'network_error'
-  | 'provider_error';
+  'invalid_config' | 'missing_bucket' | 'validation_error' | 'network_error' | 'provider_error';
 
 export interface StorageAdapterError {
   code: StorageAdapterErrorCode;

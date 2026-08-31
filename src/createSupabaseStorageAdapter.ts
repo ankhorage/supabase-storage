@@ -1,8 +1,20 @@
 import { createClient } from '@supabase/supabase-js';
 
 import { createStorageError, mapNetworkError, mapProviderError } from './errors.js';
+import {
+  extractStorageUrl,
+  invalidConfigFallback,
+  type NormalizedStorageConfig,
+  normalizeExpiry,
+  normalizeListCursor,
+  normalizeListedAsset,
+  normalizeListLimit,
+  normalizePrefix,
+  normalizeStorageConfig,
+  resolveStorageBucket,
+  resolveStoragePath,
+} from './storageNormalization.js';
 import type {
-  ListedAssetMetadata,
   ListInput,
   ListResult,
   PublicUrlInput,
@@ -18,412 +30,212 @@ import type {
   UploadResult,
 } from './types.js';
 
-interface NormalizedConfig {
-  url: string;
-  anonKey: string;
-  bucket?: string;
+type SupabaseClientLike = ReturnType<typeof createClient>;
+type StorageFailure = Extract<StorageResult<unknown>, { readonly ok: false }>;
+
+interface StorageContext {
+  readonly config: NormalizedStorageConfig | null;
+  readonly invalidConfigError: StorageFailure | null;
+  readonly supabase: SupabaseClientLike | null;
 }
 
-type SupabaseClientLike = ReturnType<typeof createClient>;
-
-const DEFAULT_LIST_LIMIT = 100;
+interface ValidStorageContext {
+  readonly config: NormalizedStorageConfig;
+  readonly supabase: SupabaseClientLike;
+}
 
 export function createSupabaseStorageAdapter(
   config: SupabaseStorageAdapterConfig,
 ): SupabaseStorageAdapter {
-  const normalizedConfigResult = normalizeConfig(config);
-
-  const supabase = normalizedConfigResult.ok
-    ? createSupabaseClient(normalizedConfigResult.data)
-    : null;
-
-  const invalidConfigError = normalizedConfigResult.ok ? null : normalizedConfigResult.error;
-
-  const resolveBucket = (bucket: string | undefined): StorageResult<string> => {
-    const resolved =
-      bucket ?? (normalizedConfigResult.ok ? normalizedConfigResult.data.bucket : undefined);
-
-    if (resolved === undefined || resolved.trim().length === 0) {
-      return {
-        ok: false,
-        error: createStorageError('missing_bucket', 'Supabase Storage bucket is required.'),
-      };
-    }
-
-    return { ok: true, data: resolved };
-  };
-
-  const resolvePath = (path: string): StorageResult<string> => {
-    const normalized = path.trim().replace(/^\/+/, '');
-
-    if (normalized.length === 0) {
-      return {
-        ok: false,
-        error: createStorageError('validation_error', 'Storage path is required.'),
-      };
-    }
-
-    return { ok: true, data: normalized };
-  };
-
-  const publicUrl = (input: PublicUrlInput): Promise<StorageResult<PublicUrlResult>> => {
-    if (invalidConfigError !== null || supabase === null) {
-      return Promise.resolve({ ok: false, error: invalidConfigError ?? invalidConfigFallback() });
-    }
-
-    const bucketResult = resolveBucket(input.bucket);
-    if (!bucketResult.ok) return Promise.resolve(bucketResult);
-
-    const pathResult = resolvePath(input.path);
-    if (!pathResult.ok) return Promise.resolve(pathResult);
-
-    try {
-      const result = supabase.storage.from(bucketResult.data).getPublicUrl(pathResult.data);
-      const url = extractUrl(result, ['publicUrl', 'publicURL']);
-
-      if (url === null) {
-        return Promise.resolve({
-          ok: false,
-          error: createStorageError(
-            'provider_error',
-            'Supabase Storage returned an invalid public URL response.',
-            { operation: 'getPublicUrl', result },
-          ),
-        });
-      }
-
-      return Promise.resolve({
-        ok: true,
-        data: {
-          asset: {
-            bucket: bucketResult.data,
-            path: pathResult.data,
-            publicUrl: url,
-          },
-        },
-      });
-    } catch (error) {
-      return Promise.resolve({ ok: false, error: mapNetworkError(error) });
-    }
-  };
-
+  const context = createStorageContext(config);
   return {
-    async upload(input: UploadInput): Promise<StorageResult<UploadResult>> {
-      if (invalidConfigError !== null || supabase === null) {
-        return { ok: false, error: invalidConfigError ?? invalidConfigFallback() };
-      }
-
-      const bucketResult = resolveBucket(input.bucket);
-      if (!bucketResult.ok) return bucketResult;
-
-      const pathResult = resolvePath(input.path);
-      if (!pathResult.ok) return pathResult;
-
-      try {
-        const { error } = await supabase.storage
-          .from(bucketResult.data)
-          .upload(pathResult.data, input.body, {
-            contentType: input.contentType,
-            upsert: input.upsert,
-            cacheControl: input.cacheControl,
-          });
-
-        if (error) {
-          return { ok: false, error: mapProviderError('upload', error) };
-        }
-
-        const publicUrlResult = await publicUrl({
-          bucket: bucketResult.data,
-          path: pathResult.data,
-        });
-        if (!publicUrlResult.ok) return publicUrlResult;
-
-        return {
-          ok: true,
-          data: {
-            asset: {
-              bucket: bucketResult.data,
-              path: pathResult.data,
-              publicUrl: publicUrlResult.data.asset.publicUrl,
-              contentType: input.contentType ?? null,
-              cacheControl: input.cacheControl ?? null,
-              size: input.body.byteLength,
-            },
-          },
-        };
-      } catch (error) {
-        return { ok: false, error: mapNetworkError(error) };
-      }
-    },
-
-    async remove(input: RemoveInput): Promise<StorageResult<RemoveResult>> {
-      if (invalidConfigError !== null || supabase === null) {
-        return { ok: false, error: invalidConfigError ?? invalidConfigFallback() };
-      }
-
-      const bucketResult = resolveBucket(input.bucket);
-      if (!bucketResult.ok) return bucketResult;
-
-      const pathResult = resolvePath(input.path);
-      if (!pathResult.ok) return pathResult;
-
-      try {
-        const { error } = await supabase.storage.from(bucketResult.data).remove([pathResult.data]);
-
-        if (error) {
-          return { ok: false, error: mapProviderError('remove', error) };
-        }
-
-        return {
-          ok: true,
-          data: {
-            removed: { bucket: bucketResult.data, path: pathResult.data },
-          },
-        };
-      } catch (error) {
-        return { ok: false, error: mapNetworkError(error) };
-      }
-    },
-
-    publicUrl,
-
-    async getPublicUrl(input: PublicUrlInput): Promise<StorageResult<PublicUrlResult>> {
-      return publicUrl(input);
-    },
-
-    async list(input: ListInput): Promise<StorageResult<ListResult>> {
-      if (invalidConfigError !== null || supabase === null) {
-        return { ok: false, error: invalidConfigError ?? invalidConfigFallback() };
-      }
-
-      const bucketResult = resolveBucket(input.bucket);
-      if (!bucketResult.ok) return bucketResult;
-
-      const limitResult = normalizeListLimit(input.limit);
-      if (!limitResult.ok) return limitResult;
-
-      const offsetResult = normalizeListCursor(input.cursor);
-      if (!offsetResult.ok) return offsetResult;
-
-      const prefix = normalizePrefix(input.prefix);
-
-      try {
-        const { data, error } = await supabase.storage.from(bucketResult.data).list(prefix, {
-          limit: limitResult.data,
-          offset: offsetResult.data,
-          sortBy: { column: 'name', order: 'asc' },
-        });
-
-        if (error) {
-          return { ok: false, error: mapProviderError('list', error) };
-        }
-
-        const assets = data
-          .map((item) => normalizeListedAsset(item, bucketResult.data, prefix))
-          .filter((item): item is ListedAssetMetadata => item !== null);
-        const nextCursor =
-          data.length < limitResult.data ? undefined : String(offsetResult.data + limitResult.data);
-
-        return {
-          ok: true,
-          data: nextCursor === undefined ? { assets } : { assets, nextCursor },
-        };
-      } catch (error) {
-        return { ok: false, error: mapNetworkError(error) };
-      }
-    },
-
-    async createSignedUrl(input: SignedUrlInput): Promise<StorageResult<SignedUrlResult>> {
-      if (invalidConfigError !== null || supabase === null) {
-        return { ok: false, error: invalidConfigError ?? invalidConfigFallback() };
-      }
-
-      const bucketResult = resolveBucket(input.bucket);
-      if (!bucketResult.ok) return bucketResult;
-
-      const pathResult = resolvePath(input.path);
-      if (!pathResult.ok) return pathResult;
-
-      const expiryResult = normalizeExpiry(input.expiresInSeconds);
-      if (!expiryResult.ok) return expiryResult;
-
-      try {
-        const result = await supabase.storage
-          .from(bucketResult.data)
-          .createSignedUrl(pathResult.data, expiryResult.data);
-
-        if (result.error) {
-          return { ok: false, error: mapProviderError('createSignedUrl', result.error) };
-        }
-
-        const signedUrl = extractUrl(result, ['signedUrl', 'signedURL']);
-        if (signedUrl === null) {
-          return {
-            ok: false,
-            error: createStorageError(
-              'provider_error',
-              'Supabase Storage returned an invalid signed URL response.',
-              { operation: 'createSignedUrl', result },
-            ),
-          };
-        }
-
-        return {
-          ok: true,
-          data: {
-            asset: {
-              bucket: bucketResult.data,
-              path: pathResult.data,
-              signedUrl,
-            },
-          },
-        };
-      } catch (error) {
-        return { ok: false, error: mapNetworkError(error) };
-      }
-    },
+    upload: (input) => uploadAsset(context, input),
+    remove: (input) => removeAsset(context, input),
+    publicUrl: (input) => getPublicUrl(context, input),
+    getPublicUrl: (input) => getPublicUrl(context, input),
+    list: (input) => listAssets(context, input),
+    createSignedUrl: (input) => createSignedAssetUrl(context, input),
   };
 }
 
-function normalizeConfig(config: SupabaseStorageAdapterConfig): StorageResult<NormalizedConfig> {
-  if (typeof config.url !== 'string' || config.url.trim().length === 0) {
-    return {
-      ok: false,
-      error: createStorageError('invalid_config', 'Supabase Storage URL is required.'),
-    };
-  }
-
-  if (typeof config.anonKey !== 'string' || config.anonKey.trim().length === 0) {
-    return {
-      ok: false,
-      error: createStorageError('invalid_config', 'Supabase anon key is required.'),
-    };
-  }
-
-  const trimmedUrl = config.url.trim();
-
+async function createSignedAssetUrl(
+  context: StorageContext,
+  input: SignedUrlInput,
+): Promise<StorageResult<SignedUrlResult>> {
+  const ready = resolveStorageContext(context);
+  if (!ready.ok) return ready;
+  const bucket = resolveStorageBucket(ready.data.config, input.bucket);
+  if (!bucket.ok) return bucket;
+  const path = resolveStoragePath(input.path);
+  if (!path.ok) return path;
+  const expiry = normalizeExpiry(input.expiresInSeconds);
+  if (!expiry.ok) return expiry;
   try {
-    const parsed = new URL(trimmedUrl);
-    const normalized = parsed.toString().replace(/\/+$/, '');
-
+    const result = await ready.data.supabase.storage
+      .from(bucket.data)
+      .createSignedUrl(path.data, expiry.data);
+    if (result.error)
+      return { ok: false, error: mapProviderError('createSignedUrl', result.error) };
+    const signedUrl = extractStorageUrl(result, ['signedUrl', 'signedURL']);
+    if (signedUrl === null) return invalidUrlResponse('signed', result);
     return {
       ok: true,
-      data: {
-        url: normalized,
-        anonKey: config.anonKey.trim(),
-        bucket: config.bucket,
-      },
+      data: { asset: { bucket: bucket.data, path: path.data, signedUrl } },
     };
   } catch (error) {
-    return {
-      ok: false,
-      error: createStorageError(
-        'invalid_config',
-        'Supabase Storage URL must be a valid URL.',
-        error,
-      ),
-    };
+    return { ok: false, error: mapNetworkError(error) };
   }
 }
 
-function createSupabaseClient(config: NormalizedConfig): SupabaseClientLike {
+function createStorageContext(config: SupabaseStorageAdapterConfig): StorageContext {
+  const normalized = normalizeStorageConfig(config);
+  if (!normalized.ok) {
+    return { config: null, invalidConfigError: normalized, supabase: null };
+  }
+  return {
+    config: normalized.data,
+    invalidConfigError: null,
+    supabase: createSupabaseClient(normalized.data),
+  };
+}
+
+function createSupabaseClient(config: NormalizedStorageConfig): SupabaseClientLike {
   return createClient(config.url, config.anonKey, {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false,
-      detectSessionInUrl: false,
-    },
+    auth: { autoRefreshToken: false, persistSession: false, detectSessionInUrl: false },
   });
 }
 
-function normalizeListLimit(value: number | undefined): StorageResult<number> {
-  const limit = value ?? DEFAULT_LIST_LIMIT;
-  return Number.isSafeInteger(limit) && limit > 0
-    ? { ok: true, data: limit }
-    : {
-        ok: false,
-        error: createStorageError(
-          'validation_error',
-          'Storage list limit must be a positive integer.',
-        ),
-      };
-}
-
-function normalizeListCursor(value: string | undefined): StorageResult<number> {
-  if (value === undefined) return { ok: true, data: 0 };
-
-  const offset = Number(value);
-  return Number.isSafeInteger(offset) && offset >= 0 && String(offset) === value
-    ? { ok: true, data: offset }
-    : {
-        ok: false,
-        error: createStorageError('validation_error', 'Storage list cursor is invalid.'),
-      };
-}
-
-function normalizeExpiry(value: number): StorageResult<number> {
-  return Number.isSafeInteger(value) && value > 0
-    ? { ok: true, data: value }
-    : {
-        ok: false,
-        error: createStorageError(
-          'validation_error',
-          'Signed URL expiry must be a positive integer in seconds.',
-        ),
-      };
-}
-
-function normalizePrefix(value: string | undefined): string {
-  return value?.trim().replace(/^\/+|\/+$/g, '') ?? '';
-}
-
-function normalizeListedAsset(
-  value: unknown,
-  bucket: string,
-  prefix: string,
-): ListedAssetMetadata | null {
-  if (!isRecord(value) || typeof value.id !== 'string' || typeof value.name !== 'string') {
-    return null;
+function resolveStorageContext(context: StorageContext): StorageResult<ValidStorageContext> {
+  if (context.config === null || context.invalidConfigError !== null || context.supabase === null) {
+    return {
+      ok: false,
+      error: context.invalidConfigError?.error ?? invalidConfigFallback(),
+    };
   }
+  return { ok: true, data: { config: context.config, supabase: context.supabase } };
+}
 
-  const metadata = isRecord(value.metadata) ? value.metadata : {};
+function getPublicUrl(
+  context: StorageContext,
+  input: PublicUrlInput,
+): Promise<StorageResult<PublicUrlResult>> {
+  const ready = resolveStorageContext(context);
+  if (!ready.ok) return Promise.resolve(ready);
+  const bucket = resolveStorageBucket(ready.data.config, input.bucket);
+  if (!bucket.ok) return Promise.resolve(bucket);
+  const path = resolveStoragePath(input.path);
+  if (!path.ok) return Promise.resolve(path);
+  try {
+    const result = ready.data.supabase.storage.from(bucket.data).getPublicUrl(path.data);
+    const publicUrl = extractStorageUrl(result, ['publicUrl', 'publicURL']);
+    if (publicUrl === null) return Promise.resolve(invalidUrlResponse('public', result));
+    return Promise.resolve({
+      ok: true,
+      data: { asset: { bucket: bucket.data, path: path.data, publicUrl } },
+    });
+  } catch (error) {
+    return Promise.resolve({ ok: false, error: mapNetworkError(error) });
+  }
+}
+
+function invalidUrlResponse(kind: 'public', result: unknown): StorageFailure;
+function invalidUrlResponse(kind: 'signed', result: unknown): StorageFailure;
+function invalidUrlResponse(kind: 'public' | 'signed', result: unknown): StorageFailure {
+  const operation = kind === 'public' ? 'getPublicUrl' : 'createSignedUrl';
   return {
-    bucket,
-    path: prefix.length === 0 ? value.name : `${prefix}/${value.name}`,
-    contentType: readString(metadata.mimetype) ?? readString(metadata.contentType),
-    size: readNumber(metadata.size),
-    createdAt: readString(value.created_at),
-    updatedAt: readString(value.updated_at),
-    etag: readString(metadata.eTag) ?? readString(metadata.etag),
+    ok: false,
+    error: createStorageError(
+      'provider_error',
+      `Supabase Storage returned an invalid ${kind} URL response.`,
+      { operation, result },
+    ),
   };
 }
 
-function extractUrl(value: unknown, keys: readonly string[]): string | null {
-  if (!isRecord(value)) return null;
-
-  const containers = isRecord(value.data) ? [value.data, value] : [value];
-  for (const container of containers) {
-    for (const key of keys) {
-      const candidate = container[key];
-      if (typeof candidate === 'string' && candidate.length > 0) return candidate;
-    }
+async function listAssets(
+  context: StorageContext,
+  input: ListInput,
+): Promise<StorageResult<ListResult>> {
+  const ready = resolveStorageContext(context);
+  if (!ready.ok) return ready;
+  const bucket = resolveStorageBucket(ready.data.config, input.bucket);
+  if (!bucket.ok) return bucket;
+  const limit = normalizeListLimit(input.limit);
+  if (!limit.ok) return limit;
+  const offset = normalizeListCursor(input.cursor);
+  if (!offset.ok) return offset;
+  const prefix = normalizePrefix(input.prefix);
+  try {
+    const { data, error } = await ready.data.supabase.storage.from(bucket.data).list(prefix, {
+      limit: limit.data,
+      offset: offset.data,
+      sortBy: { column: 'name', order: 'asc' },
+    });
+    if (error) return { ok: false, error: mapProviderError('list', error) };
+    const assets = data
+      .map((item) => normalizeListedAsset(item, bucket.data, prefix))
+      .filter((item) => item !== null);
+    const nextCursor = data.length < limit.data ? undefined : String(offset.data + limit.data);
+    return { ok: true, data: nextCursor === undefined ? { assets } : { assets, nextCursor } };
+  } catch (error) {
+    return { ok: false, error: mapNetworkError(error) };
   }
-
-  return null;
 }
 
-function readString(value: unknown): string | null {
-  return typeof value === 'string' && value.length > 0 ? value : null;
+async function removeAsset(
+  context: StorageContext,
+  input: RemoveInput,
+): Promise<StorageResult<RemoveResult>> {
+  const ready = resolveStorageContext(context);
+  if (!ready.ok) return ready;
+  const bucket = resolveStorageBucket(ready.data.config, input.bucket);
+  if (!bucket.ok) return bucket;
+  const path = resolveStoragePath(input.path);
+  if (!path.ok) return path;
+  try {
+    const { error } = await ready.data.supabase.storage.from(bucket.data).remove([path.data]);
+    if (error) return { ok: false, error: mapProviderError('remove', error) };
+    return { ok: true, data: { removed: { bucket: bucket.data, path: path.data } } };
+  } catch (error) {
+    return { ok: false, error: mapNetworkError(error) };
+  }
 }
 
-function readNumber(value: unknown): number | null {
-  return typeof value === 'number' && Number.isFinite(value) ? value : null;
-}
-
-function invalidConfigFallback() {
-  return createStorageError('invalid_config', 'Supabase Storage is not configured.');
-}
-
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === 'object' && value !== null;
+async function uploadAsset(
+  context: StorageContext,
+  input: UploadInput,
+): Promise<StorageResult<UploadResult>> {
+  const ready = resolveStorageContext(context);
+  if (!ready.ok) return ready;
+  const bucket = resolveStorageBucket(ready.data.config, input.bucket);
+  if (!bucket.ok) return bucket;
+  const path = resolveStoragePath(input.path);
+  if (!path.ok) return path;
+  try {
+    const { error } = await ready.data.supabase.storage
+      .from(bucket.data)
+      .upload(path.data, input.body, {
+        contentType: input.contentType,
+        upsert: input.upsert,
+        cacheControl: input.cacheControl,
+      });
+    if (error) return { ok: false, error: mapProviderError('upload', error) };
+    const publicUrl = await getPublicUrl(context, { bucket: bucket.data, path: path.data });
+    if (!publicUrl.ok) return publicUrl;
+    return {
+      ok: true,
+      data: {
+        asset: {
+          bucket: bucket.data,
+          path: path.data,
+          publicUrl: publicUrl.data.asset.publicUrl,
+          contentType: input.contentType ?? null,
+          cacheControl: input.cacheControl ?? null,
+          size: input.body.byteLength,
+        },
+      },
+    };
+  } catch (error) {
+    return { ok: false, error: mapNetworkError(error) };
+  }
 }
