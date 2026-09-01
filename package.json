@@ -27,7 +27,7 @@
     "@supabase/supabase-js": "^2.105.3"
   },
   "peerDependencies": {
-    "@ankhorage/contracts": "^7.4.0"
+    "@ankhorage/contracts": "^7.9.0"
   },
   "peerDependenciesMeta": {
     "@ankhorage/contracts": {
@@ -74,9 +74,9 @@
     "knip:check": "ankhorage-knip"
   },
   "devDependencies": {
-    "@ankhorage/contracts": "^7.4.0",
+    "@ankhorage/contracts": "^7.9.0",
     "@ankhorage/devtools": "^1.9.2",
-    "@ankhorage/paradox": "^0.1.7",
+    "@ankhorage/paradox": "^0.1.24",
     "@types/bun": "^1.4.0",
     "@types/node": "^25.6.0",
     "typescript": "^5.9.3"
