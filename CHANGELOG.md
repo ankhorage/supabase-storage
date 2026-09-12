@@ -1,5 +1,11 @@
 # @ankhorage/supabase-storage
 
+## 0.2.7
+
+### Patch Changes
+
+- 9a50bc6: Use package metadata as the default Paradox documentation title and description.
+
 ## 0.2.6
 
 ### Patch Changes
