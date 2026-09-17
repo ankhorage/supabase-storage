@@ -16,12 +16,13 @@
     "url": "git+https://github.com/ankhorage/supabase-storage.git"
   },
   "keywords": [
-    "typescript",
-    "supabase",
-    "storage",
-    "file-upload",
     "adapter",
-    "assets"
+    "ankhorage",
+    "assets",
+    "file-upload",
+    "storage",
+    "supabase",
+    "typescript"
   ],
   "dependencies": {
     "@supabase/supabase-js": "^2.105.3"
