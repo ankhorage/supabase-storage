@@ -1,14 +1,17 @@
 sequenceDiagram
   participant participant_createClient as createClient
+  participant participant_createStorageContext as createStorageContext
   participant participant_createStorageError as createStorageError
   participant participant_createSupabaseClient as createSupabaseClient
   participant participant_createSupabaseStorageAdapter as createSupabaseStorageAdapter
-  participant participant_normalizeConfig as normalizeConfig
-  participant_createSupabaseStorageAdapter->>participant_normalizeConfig: normalizeConfig()
-  participant_normalizeConfig->>participant_createStorageError: createStorageError()
-  participant_createStorageError-->>participant_normalizeConfig: return
-  participant_normalizeConfig-->>participant_createSupabaseStorageAdapter: return
-  participant_createSupabaseStorageAdapter->>participant_createSupabaseClient: createSupabaseClient()
+  participant participant_normalizeStorageConfig as normalizeStorageConfig
+  participant_createSupabaseStorageAdapter->>participant_createStorageContext: createStorageContext()
+  participant_createStorageContext->>participant_normalizeStorageConfig: normalizeStorageConfig()
+  participant_normalizeStorageConfig->>participant_createStorageError: createStorageError()
+  participant_createStorageError-->>participant_normalizeStorageConfig: return
+  participant_normalizeStorageConfig-->>participant_createStorageContext: return
+  participant_createStorageContext->>participant_createSupabaseClient: createSupabaseClient()
   participant_createSupabaseClient->>participant_createClient: createClient()
   participant_createClient-->>participant_createSupabaseClient: return
-  participant_createSupabaseClient-->>participant_createSupabaseStorageAdapter: return
+  participant_createSupabaseClient-->>participant_createStorageContext: return
+  participant_createStorageContext-->>participant_createSupabaseStorageAdapter: return

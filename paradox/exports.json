@@ -8,10 +8,12 @@
     "modulePath": "src/types.ts",
     "sourceLocation": {
       "filePath": "src/types.ts",
-      "line": 56,
+      "line": 52,
       "column": 1
     },
-    "exportPaths": ["src/index.ts"],
+    "exportPaths": [
+      "src/index.ts"
+    ],
     "relatedSymbols": [],
     "signatures": [],
     "members": [
@@ -69,11 +71,16 @@
     "modulePath": "src/createSupabaseStorageAdapter.ts",
     "sourceLocation": {
       "filePath": "src/createSupabaseStorageAdapter.ts",
-      "line": 31,
+      "line": 47,
       "column": 1
     },
-    "exportPaths": ["src/index.ts"],
-    "relatedSymbols": ["SupabaseStorageAdapter", "SupabaseStorageAdapterConfig"],
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "SupabaseStorageAdapter",
+      "SupabaseStorageAdapterConfig"
+    ],
     "signatures": [
       {
         "label": "(config: SupabaseStorageAdapterConfig) => SupabaseStorageAdapter",
@@ -101,10 +108,12 @@
     "modulePath": "src/types.ts",
     "sourceLocation": {
       "filePath": "src/types.ts",
-      "line": 65,
+      "line": 61,
       "column": 1
     },
-    "exportPaths": ["src/index.ts"],
+    "exportPaths": [
+      "src/index.ts"
+    ],
     "relatedSymbols": [],
     "signatures": [],
     "members": [
@@ -169,10 +178,12 @@
     "modulePath": "src/types.ts",
     "sourceLocation": {
       "filePath": "src/types.ts",
-      "line": 43,
+      "line": 39,
       "column": 1
     },
-    "exportPaths": ["src/index.ts"],
+    "exportPaths": [
+      "src/index.ts"
+    ],
     "relatedSymbols": [],
     "signatures": [],
     "members": [
@@ -216,11 +227,15 @@
     "modulePath": "src/types.ts",
     "sourceLocation": {
       "filePath": "src/types.ts",
-      "line": 90,
+      "line": 86,
       "column": 1
     },
-    "exportPaths": ["src/index.ts"],
-    "relatedSymbols": ["ListedAssetMetadata"],
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "ListedAssetMetadata"
+    ],
     "signatures": [],
     "members": [
       {
@@ -249,10 +264,12 @@
     "modulePath": "src/types.ts",
     "sourceLocation": {
       "filePath": "src/types.ts",
-      "line": 38,
+      "line": 34,
       "column": 1
     },
-    "exportPaths": ["src/index.ts"],
+    "exportPaths": [
+      "src/index.ts"
+    ],
     "relatedSymbols": [],
     "signatures": [],
     "members": [
@@ -282,11 +299,15 @@
     "modulePath": "src/types.ts",
     "sourceLocation": {
       "filePath": "src/types.ts",
-      "line": 86,
+      "line": 82,
       "column": 1
     },
-    "exportPaths": ["src/index.ts"],
-    "relatedSymbols": ["AssetMetadata"],
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "AssetMetadata"
+    ],
     "signatures": [],
     "members": [
       {
@@ -308,10 +329,12 @@
     "modulePath": "src/types.ts",
     "sourceLocation": {
       "filePath": "src/types.ts",
-      "line": 33,
+      "line": 29,
       "column": 1
     },
-    "exportPaths": ["src/index.ts"],
+    "exportPaths": [
+      "src/index.ts"
+    ],
     "relatedSymbols": [],
     "signatures": [],
     "members": [
@@ -341,10 +364,12 @@
     "modulePath": "src/types.ts",
     "sourceLocation": {
       "filePath": "src/types.ts",
-      "line": 79,
+      "line": 75,
       "column": 1
     },
-    "exportPaths": ["src/index.ts"],
+    "exportPaths": [
+      "src/index.ts"
+    ],
     "relatedSymbols": [],
     "signatures": [],
     "members": [
@@ -367,10 +392,12 @@
     "modulePath": "src/types.ts",
     "sourceLocation": {
       "filePath": "src/types.ts",
-      "line": 50,
+      "line": 46,
       "column": 1
     },
-    "exportPaths": ["src/index.ts"],
+    "exportPaths": [
+      "src/index.ts"
+    ],
     "relatedSymbols": [],
     "signatures": [],
     "members": [
@@ -407,10 +434,12 @@
     "modulePath": "src/types.ts",
     "sourceLocation": {
       "filePath": "src/types.ts",
-      "line": 95,
+      "line": 91,
       "column": 1
     },
-    "exportPaths": ["src/index.ts"],
+    "exportPaths": [
+      "src/index.ts"
+    ],
     "relatedSymbols": [],
     "signatures": [],
     "members": [
@@ -433,11 +462,15 @@
     "modulePath": "src/types.ts",
     "sourceLocation": {
       "filePath": "src/types.ts",
-      "line": 10,
+      "line": 6,
       "column": 1
     },
-    "exportPaths": ["src/index.ts"],
-    "relatedSymbols": ["StorageAdapterErrorCode"],
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "StorageAdapterErrorCode"
+    ],
     "signatures": [],
     "members": [
       {
@@ -476,7 +509,9 @@
       "line": 3,
       "column": 1
     },
-    "exportPaths": ["src/index.ts"],
+    "exportPaths": [
+      "src/index.ts"
+    ],
     "relatedSymbols": [],
     "signatures": [],
     "members": [],
@@ -494,7 +529,9 @@
       "line": 1,
       "column": 1
     },
-    "exportPaths": ["src/index.ts"],
+    "exportPaths": [
+      "src/index.ts"
+    ],
     "relatedSymbols": [],
     "signatures": [],
     "members": [],
@@ -509,10 +546,12 @@
     "modulePath": "src/types.ts",
     "sourceLocation": {
       "filePath": "src/types.ts",
-      "line": 103,
+      "line": 99,
       "column": 1
     },
-    "exportPaths": ["src/index.ts"],
+    "exportPaths": [
+      "src/index.ts"
+    ],
     "relatedSymbols": [
       "ListInput",
       "ListResult",
@@ -582,10 +621,12 @@
     "modulePath": "src/types.ts",
     "sourceLocation": {
       "filePath": "src/types.ts",
-      "line": 16,
+      "line": 12,
       "column": 1
     },
-    "exportPaths": ["src/index.ts"],
+    "exportPaths": [
+      "src/index.ts"
+    ],
     "relatedSymbols": [],
     "signatures": [],
     "members": [
@@ -622,10 +663,12 @@
     "modulePath": "src/types.ts",
     "sourceLocation": {
       "filePath": "src/types.ts",
-      "line": 22,
+      "line": 18,
       "column": 1
     },
-    "exportPaths": ["src/index.ts"],
+    "exportPaths": [
+      "src/index.ts"
+    ],
     "relatedSymbols": [],
     "signatures": [],
     "members": [],
@@ -640,17 +683,21 @@
     "modulePath": "src/types.ts",
     "sourceLocation": {
       "filePath": "src/types.ts",
-      "line": 24,
+      "line": 20,
       "column": 1
     },
-    "exportPaths": ["src/index.ts"],
-    "relatedSymbols": [],
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "UploadBody"
+    ],
     "signatures": [],
     "members": [
       {
         "name": "body",
         "kind": "property",
-        "type": "Uint8Array",
+        "type": "UploadBody",
         "required": true,
         "description": null
       },
@@ -701,11 +748,15 @@
     "modulePath": "src/types.ts",
     "sourceLocation": {
       "filePath": "src/types.ts",
-      "line": 75,
+      "line": 71,
       "column": 1
     },
-    "exportPaths": ["src/index.ts"],
-    "relatedSymbols": ["AssetMetadata"],
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "AssetMetadata"
+    ],
     "signatures": [],
     "members": [
       {

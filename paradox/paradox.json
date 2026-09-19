@@ -1,7 +1,9 @@
 {
   "packageName": "@ankhorage/supabase-storage",
   "packageId": "@ankhorage/supabase-storage",
-  "description": "Type-safe Supabase Storage adapter for uploads, public URLs, and asset metadata.",
+  "description": "Type-safe Supabase Storage adapter for uploads, listing, URL resolution, and asset metadata.",
+  "collaborators": null,
+  "donation": null,
   "badges": [
     {
       "id": "license",
@@ -12,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.1.1",
+      "value": "v0.2.13",
       "color": "cb3837"
     },
     {
@@ -59,8 +61,14 @@
     }
   ],
   "usage": null,
+  "readmeUsageDescription": null,
+  "readmeUsage": [],
+  "readmeCli": null,
+  "readmeConfig": null,
   "config": null,
-  "entrypoints": ["src/index.ts"],
+  "entrypoints": [
+    "src/index.ts"
+  ],
   "modules": [
     {
       "path": "src/contracts/createContractsSupabaseStorageAdapter.ts",
@@ -70,31 +78,62 @@
         "src/createSupabaseStorageAdapter.ts",
         "src/types.ts"
       ],
-      "exports": ["createContractsSupabaseStorageAdapter"]
+      "exports": [
+        "createContractsSupabaseStorageAdapter"
+      ]
     },
     {
       "path": "src/contracts/index.ts",
       "isEntrypoint": false,
       "dependencies": [],
-      "exports": ["createContractsSupabaseStorageAdapter"]
+      "exports": [
+        "createContractsSupabaseStorageAdapter"
+      ]
     },
     {
       "path": "src/contracts/toMediaStorageAdapter.ts",
       "isEntrypoint": false,
-      "dependencies": ["src/types.ts"],
-      "exports": ["toMediaStorageAdapter"]
+      "dependencies": [
+        "src/types.ts"
+      ],
+      "exports": [
+        "toMediaStorageAdapter"
+      ]
+    },
+    {
+      "path": "src/createSupabaseStorageAdapter.testSupport.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "CreateClientCall",
+        "createSupabaseClientStub",
+        "mockSupabaseModule",
+        "SupabaseClientStub"
+      ]
     },
     {
       "path": "src/createSupabaseStorageAdapter.ts",
       "isEntrypoint": false,
-      "dependencies": ["src/errors.ts", "src/types.ts"],
-      "exports": ["createSupabaseStorageAdapter"]
+      "dependencies": [
+        "src/errors.ts",
+        "src/storageNormalization.ts",
+        "src/types.ts"
+      ],
+      "exports": [
+        "createSupabaseStorageAdapter"
+      ]
     },
     {
       "path": "src/errors.ts",
       "isEntrypoint": false,
-      "dependencies": ["src/types.ts"],
-      "exports": ["createStorageError", "mapNetworkError", "mapProviderError"]
+      "dependencies": [
+        "src/types.ts"
+      ],
+      "exports": [
+        "createStorageError",
+        "mapNetworkError",
+        "mapProviderError"
+      ]
     },
     {
       "path": "src/index.ts",
@@ -120,6 +159,27 @@
         "UploadBody",
         "UploadInput",
         "UploadResult"
+      ]
+    },
+    {
+      "path": "src/storageNormalization.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/errors.ts",
+        "src/types.ts"
+      ],
+      "exports": [
+        "extractStorageUrl",
+        "invalidConfigFallback",
+        "NormalizedStorageConfig",
+        "normalizeExpiry",
+        "normalizeListCursor",
+        "normalizeListedAsset",
+        "normalizeListLimit",
+        "normalizePrefix",
+        "normalizeStorageConfig",
+        "resolveStorageBucket",
+        "resolveStoragePath"
       ]
     },
     {
@@ -158,10 +218,12 @@
       "modulePath": "src/types.ts",
       "sourceLocation": {
         "filePath": "src/types.ts",
-        "line": 56,
+        "line": 52,
         "column": 1
       },
-      "exportPaths": ["src/index.ts"],
+      "exportPaths": [
+        "src/index.ts"
+      ],
       "relatedSymbols": [],
       "signatures": [],
       "members": [
@@ -219,11 +281,16 @@
       "modulePath": "src/createSupabaseStorageAdapter.ts",
       "sourceLocation": {
         "filePath": "src/createSupabaseStorageAdapter.ts",
-        "line": 31,
+        "line": 47,
         "column": 1
       },
-      "exportPaths": ["src/index.ts"],
-      "relatedSymbols": ["SupabaseStorageAdapter", "SupabaseStorageAdapterConfig"],
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "SupabaseStorageAdapter",
+        "SupabaseStorageAdapterConfig"
+      ],
       "signatures": [
         {
           "label": "(config: SupabaseStorageAdapterConfig) => SupabaseStorageAdapter",
@@ -251,10 +318,12 @@
       "modulePath": "src/types.ts",
       "sourceLocation": {
         "filePath": "src/types.ts",
-        "line": 65,
+        "line": 61,
         "column": 1
       },
-      "exportPaths": ["src/index.ts"],
+      "exportPaths": [
+        "src/index.ts"
+      ],
       "relatedSymbols": [],
       "signatures": [],
       "members": [
@@ -319,10 +388,12 @@
       "modulePath": "src/types.ts",
       "sourceLocation": {
         "filePath": "src/types.ts",
-        "line": 43,
+        "line": 39,
         "column": 1
       },
-      "exportPaths": ["src/index.ts"],
+      "exportPaths": [
+        "src/index.ts"
+      ],
       "relatedSymbols": [],
       "signatures": [],
       "members": [
@@ -366,11 +437,15 @@
       "modulePath": "src/types.ts",
       "sourceLocation": {
         "filePath": "src/types.ts",
-        "line": 90,
+        "line": 86,
         "column": 1
       },
-      "exportPaths": ["src/index.ts"],
-      "relatedSymbols": ["ListedAssetMetadata"],
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "ListedAssetMetadata"
+      ],
       "signatures": [],
       "members": [
         {
@@ -399,10 +474,12 @@
       "modulePath": "src/types.ts",
       "sourceLocation": {
         "filePath": "src/types.ts",
-        "line": 38,
+        "line": 34,
         "column": 1
       },
-      "exportPaths": ["src/index.ts"],
+      "exportPaths": [
+        "src/index.ts"
+      ],
       "relatedSymbols": [],
       "signatures": [],
       "members": [
@@ -432,11 +509,15 @@
       "modulePath": "src/types.ts",
       "sourceLocation": {
         "filePath": "src/types.ts",
-        "line": 86,
+        "line": 82,
         "column": 1
       },
-      "exportPaths": ["src/index.ts"],
-      "relatedSymbols": ["AssetMetadata"],
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "AssetMetadata"
+      ],
       "signatures": [],
       "members": [
         {
@@ -458,10 +539,12 @@
       "modulePath": "src/types.ts",
       "sourceLocation": {
         "filePath": "src/types.ts",
-        "line": 33,
+        "line": 29,
         "column": 1
       },
-      "exportPaths": ["src/index.ts"],
+      "exportPaths": [
+        "src/index.ts"
+      ],
       "relatedSymbols": [],
       "signatures": [],
       "members": [
@@ -491,10 +574,12 @@
       "modulePath": "src/types.ts",
       "sourceLocation": {
         "filePath": "src/types.ts",
-        "line": 79,
+        "line": 75,
         "column": 1
       },
-      "exportPaths": ["src/index.ts"],
+      "exportPaths": [
+        "src/index.ts"
+      ],
       "relatedSymbols": [],
       "signatures": [],
       "members": [
@@ -517,10 +602,12 @@
       "modulePath": "src/types.ts",
       "sourceLocation": {
         "filePath": "src/types.ts",
-        "line": 50,
+        "line": 46,
         "column": 1
       },
-      "exportPaths": ["src/index.ts"],
+      "exportPaths": [
+        "src/index.ts"
+      ],
       "relatedSymbols": [],
       "signatures": [],
       "members": [
@@ -557,10 +644,12 @@
       "modulePath": "src/types.ts",
       "sourceLocation": {
         "filePath": "src/types.ts",
-        "line": 95,
+        "line": 91,
         "column": 1
       },
-      "exportPaths": ["src/index.ts"],
+      "exportPaths": [
+        "src/index.ts"
+      ],
       "relatedSymbols": [],
       "signatures": [],
       "members": [
@@ -583,11 +672,15 @@
       "modulePath": "src/types.ts",
       "sourceLocation": {
         "filePath": "src/types.ts",
-        "line": 10,
+        "line": 6,
         "column": 1
       },
-      "exportPaths": ["src/index.ts"],
-      "relatedSymbols": ["StorageAdapterErrorCode"],
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "StorageAdapterErrorCode"
+      ],
       "signatures": [],
       "members": [
         {
@@ -626,7 +719,9 @@
         "line": 3,
         "column": 1
       },
-      "exportPaths": ["src/index.ts"],
+      "exportPaths": [
+        "src/index.ts"
+      ],
       "relatedSymbols": [],
       "signatures": [],
       "members": [],
@@ -644,7 +739,9 @@
         "line": 1,
         "column": 1
       },
-      "exportPaths": ["src/index.ts"],
+      "exportPaths": [
+        "src/index.ts"
+      ],
       "relatedSymbols": [],
       "signatures": [],
       "members": [],
@@ -659,10 +756,12 @@
       "modulePath": "src/types.ts",
       "sourceLocation": {
         "filePath": "src/types.ts",
-        "line": 103,
+        "line": 99,
         "column": 1
       },
-      "exportPaths": ["src/index.ts"],
+      "exportPaths": [
+        "src/index.ts"
+      ],
       "relatedSymbols": [
         "ListInput",
         "ListResult",
@@ -732,10 +831,12 @@
       "modulePath": "src/types.ts",
       "sourceLocation": {
         "filePath": "src/types.ts",
-        "line": 16,
+        "line": 12,
         "column": 1
       },
-      "exportPaths": ["src/index.ts"],
+      "exportPaths": [
+        "src/index.ts"
+      ],
       "relatedSymbols": [],
       "signatures": [],
       "members": [
@@ -772,10 +873,12 @@
       "modulePath": "src/types.ts",
       "sourceLocation": {
         "filePath": "src/types.ts",
-        "line": 22,
+        "line": 18,
         "column": 1
       },
-      "exportPaths": ["src/index.ts"],
+      "exportPaths": [
+        "src/index.ts"
+      ],
       "relatedSymbols": [],
       "signatures": [],
       "members": [],
@@ -790,17 +893,21 @@
       "modulePath": "src/types.ts",
       "sourceLocation": {
         "filePath": "src/types.ts",
-        "line": 24,
+        "line": 20,
         "column": 1
       },
-      "exportPaths": ["src/index.ts"],
-      "relatedSymbols": [],
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "UploadBody"
+      ],
       "signatures": [],
       "members": [
         {
           "name": "body",
           "kind": "property",
-          "type": "Uint8Array",
+          "type": "UploadBody",
           "required": true,
           "description": null
         },
@@ -851,11 +958,15 @@
       "modulePath": "src/types.ts",
       "sourceLocation": {
         "filePath": "src/types.ts",
-        "line": 75,
+        "line": 71,
         "column": 1
       },
-      "exportPaths": ["src/index.ts"],
-      "relatedSymbols": ["AssetMetadata"],
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "AssetMetadata"
+      ],
       "signatures": [],
       "members": [
         {
@@ -885,7 +996,43 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/contracts/toMediaStorageAdapter.ts",
-        "line": 12,
+        "line": 16,
+        "column": 1
+      }
+    },
+    {
+      "name": "listMedia",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/contracts/toMediaStorageAdapter.ts",
+        "line": 29,
+        "column": 1
+      }
+    },
+    {
+      "name": "removeMedia",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/contracts/toMediaStorageAdapter.ts",
+        "line": 49,
+        "column": 1
+      }
+    },
+    {
+      "name": "resolveMedia",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/contracts/toMediaStorageAdapter.ts",
+        "line": 54,
+        "column": 1
+      }
+    },
+    {
+      "name": "resolvePublicMedia",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/contracts/toMediaStorageAdapter.ts",
+        "line": 80,
         "column": 1
       }
     },
@@ -894,7 +1041,34 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/contracts/toMediaStorageAdapter.ts",
-        "line": 109,
+        "line": 100,
+        "column": 1
+      }
+    },
+    {
+      "name": "uploadMedia",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/contracts/toMediaStorageAdapter.ts",
+        "line": 113,
+        "column": 1
+      }
+    },
+    {
+      "name": "createSupabaseClientStub",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/createSupabaseStorageAdapter.testSupport.ts",
+        "line": 52,
+        "column": 1
+      }
+    },
+    {
+      "name": "mockSupabaseModule",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/createSupabaseStorageAdapter.testSupport.ts",
+        "line": 102,
         "column": 1
       }
     },
@@ -903,43 +1077,25 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/createSupabaseStorageAdapter.ts",
-        "line": 31,
+        "line": 47,
         "column": 1
       }
     },
     {
-      "name": "resolveBucket",
+      "name": "createSignedAssetUrl",
       "description": null,
       "sourceLocation": {
         "filePath": "src/createSupabaseStorageAdapter.ts",
-        "line": 42,
-        "column": 9
+        "line": 61,
+        "column": 1
       }
     },
     {
-      "name": "resolvePath",
+      "name": "createStorageContext",
       "description": null,
       "sourceLocation": {
         "filePath": "src/createSupabaseStorageAdapter.ts",
-        "line": 56,
-        "column": 9
-      }
-    },
-    {
-      "name": "publicUrl",
-      "description": null,
-      "sourceLocation": {
-        "filePath": "src/createSupabaseStorageAdapter.ts",
-        "line": 69,
-        "column": 9
-      }
-    },
-    {
-      "name": "normalizeConfig",
-      "description": null,
-      "sourceLocation": {
-        "filePath": "src/createSupabaseStorageAdapter.ts",
-        "line": 288,
+        "line": 90,
         "column": 1
       }
     },
@@ -948,97 +1104,79 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/createSupabaseStorageAdapter.ts",
-        "line": 329,
+        "line": 102,
         "column": 1
       }
     },
     {
-      "name": "normalizeListLimit",
+      "name": "resolveStorageContext",
       "description": null,
       "sourceLocation": {
         "filePath": "src/createSupabaseStorageAdapter.ts",
-        "line": 339,
+        "line": 108,
         "column": 1
       }
     },
     {
-      "name": "normalizeListCursor",
+      "name": "getPublicUrl",
       "description": null,
       "sourceLocation": {
         "filePath": "src/createSupabaseStorageAdapter.ts",
-        "line": 352,
+        "line": 118,
         "column": 1
       }
     },
     {
-      "name": "normalizeExpiry",
+      "name": "invalidUrlResponse",
       "description": null,
       "sourceLocation": {
         "filePath": "src/createSupabaseStorageAdapter.ts",
-        "line": 364,
+        "line": 141,
         "column": 1
       }
     },
     {
-      "name": "normalizePrefix",
+      "name": "invalidUrlResponse",
       "description": null,
       "sourceLocation": {
         "filePath": "src/createSupabaseStorageAdapter.ts",
-        "line": 376,
+        "line": 142,
         "column": 1
       }
     },
     {
-      "name": "normalizeListedAsset",
+      "name": "invalidUrlResponse",
       "description": null,
       "sourceLocation": {
         "filePath": "src/createSupabaseStorageAdapter.ts",
-        "line": 380,
+        "line": 143,
         "column": 1
       }
     },
     {
-      "name": "extractUrl",
+      "name": "listAssets",
       "description": null,
       "sourceLocation": {
         "filePath": "src/createSupabaseStorageAdapter.ts",
-        "line": 401,
+        "line": 155,
         "column": 1
       }
     },
     {
-      "name": "readString",
+      "name": "removeAsset",
       "description": null,
       "sourceLocation": {
         "filePath": "src/createSupabaseStorageAdapter.ts",
-        "line": 415,
+        "line": 185,
         "column": 1
       }
     },
     {
-      "name": "readNumber",
+      "name": "uploadAsset",
       "description": null,
       "sourceLocation": {
         "filePath": "src/createSupabaseStorageAdapter.ts",
-        "line": 419,
-        "column": 1
-      }
-    },
-    {
-      "name": "invalidConfigFallback",
-      "description": null,
-      "sourceLocation": {
-        "filePath": "src/createSupabaseStorageAdapter.ts",
-        "line": 423,
-        "column": 1
-      }
-    },
-    {
-      "name": "isRecord",
-      "description": null,
-      "sourceLocation": {
-        "filePath": "src/createSupabaseStorageAdapter.ts",
-        "line": 427,
+        "line": 204,
         "column": 1
       }
     },
@@ -1086,6 +1224,123 @@
         "line": 48,
         "column": 1
       }
+    },
+    {
+      "name": "extractStorageUrl",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/storageNormalization.ts",
+        "line": 12,
+        "column": 1
+      }
+    },
+    {
+      "name": "invalidConfigFallback",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/storageNormalization.ts",
+        "line": 25,
+        "column": 1
+      }
+    },
+    {
+      "name": "normalizeExpiry",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/storageNormalization.ts",
+        "line": 29,
+        "column": 1
+      }
+    },
+    {
+      "name": "normalizeListCursor",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/storageNormalization.ts",
+        "line": 41,
+        "column": 1
+      }
+    },
+    {
+      "name": "normalizeListLimit",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/storageNormalization.ts",
+        "line": 52,
+        "column": 1
+      }
+    },
+    {
+      "name": "normalizeListedAsset",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/storageNormalization.ts",
+        "line": 65,
+        "column": 1
+      }
+    },
+    {
+      "name": "normalizePrefix",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/storageNormalization.ts",
+        "line": 85,
+        "column": 1
+      }
+    },
+    {
+      "name": "normalizeStorageConfig",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/storageNormalization.ts",
+        "line": 89,
+        "column": 1
+      }
+    },
+    {
+      "name": "resolveStorageBucket",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/storageNormalization.ts",
+        "line": 126,
+        "column": 1
+      }
+    },
+    {
+      "name": "resolveStoragePath",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/storageNormalization.ts",
+        "line": 139,
+        "column": 1
+      }
+    },
+    {
+      "name": "isRecord",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/storageNormalization.ts",
+        "line": 149,
+        "column": 1
+      }
+    },
+    {
+      "name": "readNumber",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/storageNormalization.ts",
+        "line": 153,
+        "column": 1
+      }
+    },
+    {
+      "name": "readString",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/storageNormalization.ts",
+        "line": 157,
+        "column": 1
+      }
     }
   ],
   "sequenceScenarios": [
@@ -1107,6 +1362,11 @@
       },
       {
         "fromPath": "src/createSupabaseStorageAdapter.ts",
+        "toPath": "src/storageNormalization.ts",
+        "sourcePath": "src/createSupabaseStorageAdapter.ts"
+      },
+      {
+        "fromPath": "src/createSupabaseStorageAdapter.ts",
         "toPath": "src/types.ts",
         "sourcePath": "src/createSupabaseStorageAdapter.ts"
       },
@@ -1124,6 +1384,16 @@
         "fromPath": "src/index.ts",
         "toPath": "src/types.ts",
         "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/storageNormalization.ts",
+        "toPath": "src/errors.ts",
+        "sourcePath": "src/storageNormalization.ts"
+      },
+      {
+        "fromPath": "src/storageNormalization.ts",
+        "toPath": "src/types.ts",
+        "sourcePath": "src/storageNormalization.ts"
       },
       {
         "fromPath": "src/contracts/createContractsSupabaseStorageAdapter.ts",
@@ -1154,168 +1424,192 @@
     "calls": [
       {
         "fromSymbol": "createSupabaseStorageAdapter",
-        "toSymbol": "normalizeConfig",
-        "callExpression": "normalizeConfig",
+        "toSymbol": "createStorageContext",
+        "callExpression": "createStorageContext",
         "sourcePath": "src/createSupabaseStorageAdapter.ts"
       },
       {
-        "fromSymbol": "createSupabaseStorageAdapter",
+        "fromSymbol": "upload",
+        "toSymbol": "uploadAsset",
+        "callExpression": "uploadAsset",
+        "sourcePath": "src/createSupabaseStorageAdapter.ts"
+      },
+      {
+        "fromSymbol": "remove",
+        "toSymbol": "removeAsset",
+        "callExpression": "removeAsset",
+        "sourcePath": "src/createSupabaseStorageAdapter.ts"
+      },
+      {
+        "fromSymbol": "publicUrl",
+        "toSymbol": "getPublicUrl",
+        "callExpression": "getPublicUrl",
+        "sourcePath": "src/createSupabaseStorageAdapter.ts"
+      },
+      {
+        "fromSymbol": "getPublicUrl",
+        "toSymbol": "getPublicUrl",
+        "callExpression": "getPublicUrl",
+        "sourcePath": "src/createSupabaseStorageAdapter.ts"
+      },
+      {
+        "fromSymbol": "list",
+        "toSymbol": "listAssets",
+        "callExpression": "listAssets",
+        "sourcePath": "src/createSupabaseStorageAdapter.ts"
+      },
+      {
+        "fromSymbol": "createSignedUrl",
+        "toSymbol": "createSignedAssetUrl",
+        "callExpression": "createSignedAssetUrl",
+        "sourcePath": "src/createSupabaseStorageAdapter.ts"
+      },
+      {
+        "fromSymbol": "createSignedAssetUrl",
+        "toSymbol": "resolveStorageContext",
+        "callExpression": "resolveStorageContext",
+        "sourcePath": "src/createSupabaseStorageAdapter.ts"
+      },
+      {
+        "fromSymbol": "createSignedAssetUrl",
+        "toSymbol": "resolveStorageBucket",
+        "callExpression": "resolveStorageBucket",
+        "sourcePath": "src/createSupabaseStorageAdapter.ts"
+      },
+      {
+        "fromSymbol": "createSignedAssetUrl",
+        "toSymbol": "resolveStoragePath",
+        "callExpression": "resolveStoragePath",
+        "sourcePath": "src/createSupabaseStorageAdapter.ts"
+      },
+      {
+        "fromSymbol": "createSignedAssetUrl",
+        "toSymbol": "normalizeExpiry",
+        "callExpression": "normalizeExpiry",
+        "sourcePath": "src/createSupabaseStorageAdapter.ts"
+      },
+      {
+        "fromSymbol": "createSignedAssetUrl",
+        "toSymbol": "mapProviderError",
+        "callExpression": "mapProviderError",
+        "sourcePath": "src/createSupabaseStorageAdapter.ts"
+      },
+      {
+        "fromSymbol": "createSignedAssetUrl",
+        "toSymbol": "extractStorageUrl",
+        "callExpression": "extractStorageUrl",
+        "sourcePath": "src/createSupabaseStorageAdapter.ts"
+      },
+      {
+        "fromSymbol": "createSignedAssetUrl",
+        "toSymbol": "invalidUrlResponse",
+        "callExpression": "invalidUrlResponse",
+        "sourcePath": "src/createSupabaseStorageAdapter.ts"
+      },
+      {
+        "fromSymbol": "createSignedAssetUrl",
+        "toSymbol": "mapNetworkError",
+        "callExpression": "mapNetworkError",
+        "sourcePath": "src/createSupabaseStorageAdapter.ts"
+      },
+      {
+        "fromSymbol": "createStorageContext",
+        "toSymbol": "normalizeStorageConfig",
+        "callExpression": "normalizeStorageConfig",
+        "sourcePath": "src/createSupabaseStorageAdapter.ts"
+      },
+      {
+        "fromSymbol": "createStorageContext",
         "toSymbol": "createSupabaseClient",
         "callExpression": "createSupabaseClient",
         "sourcePath": "src/createSupabaseStorageAdapter.ts"
       },
       {
-        "fromSymbol": "resolveBucket",
-        "toSymbol": "createStorageError",
-        "callExpression": "createStorageError",
+        "fromSymbol": "createSupabaseClient",
+        "toSymbol": "createClient",
+        "callExpression": "createClient",
         "sourcePath": "src/createSupabaseStorageAdapter.ts"
       },
       {
-        "fromSymbol": "resolvePath",
-        "toSymbol": "createStorageError",
-        "callExpression": "createStorageError",
-        "sourcePath": "src/createSupabaseStorageAdapter.ts"
-      },
-      {
-        "fromSymbol": "publicUrl",
+        "fromSymbol": "resolveStorageContext",
         "toSymbol": "invalidConfigFallback",
         "callExpression": "invalidConfigFallback",
-        "sourcePath": "src/createSupabaseStorageAdapter.ts"
-      },
-      {
-        "fromSymbol": "publicUrl",
-        "toSymbol": "resolveBucket",
-        "callExpression": "resolveBucket",
-        "sourcePath": "src/createSupabaseStorageAdapter.ts"
-      },
-      {
-        "fromSymbol": "publicUrl",
-        "toSymbol": "resolvePath",
-        "callExpression": "resolvePath",
-        "sourcePath": "src/createSupabaseStorageAdapter.ts"
-      },
-      {
-        "fromSymbol": "publicUrl",
-        "toSymbol": "extractUrl",
-        "callExpression": "extractUrl",
-        "sourcePath": "src/createSupabaseStorageAdapter.ts"
-      },
-      {
-        "fromSymbol": "publicUrl",
-        "toSymbol": "createStorageError",
-        "callExpression": "createStorageError",
-        "sourcePath": "src/createSupabaseStorageAdapter.ts"
-      },
-      {
-        "fromSymbol": "publicUrl",
-        "toSymbol": "mapNetworkError",
-        "callExpression": "mapNetworkError",
-        "sourcePath": "src/createSupabaseStorageAdapter.ts"
-      },
-      {
-        "fromSymbol": "upload",
-        "toSymbol": "invalidConfigFallback",
-        "callExpression": "invalidConfigFallback",
-        "sourcePath": "src/createSupabaseStorageAdapter.ts"
-      },
-      {
-        "fromSymbol": "upload",
-        "toSymbol": "resolveBucket",
-        "callExpression": "resolveBucket",
-        "sourcePath": "src/createSupabaseStorageAdapter.ts"
-      },
-      {
-        "fromSymbol": "upload",
-        "toSymbol": "resolvePath",
-        "callExpression": "resolvePath",
-        "sourcePath": "src/createSupabaseStorageAdapter.ts"
-      },
-      {
-        "fromSymbol": "upload",
-        "toSymbol": "mapProviderError",
-        "callExpression": "mapProviderError",
-        "sourcePath": "src/createSupabaseStorageAdapter.ts"
-      },
-      {
-        "fromSymbol": "upload",
-        "toSymbol": "publicUrl",
-        "callExpression": "publicUrl",
-        "sourcePath": "src/createSupabaseStorageAdapter.ts"
-      },
-      {
-        "fromSymbol": "upload",
-        "toSymbol": "mapNetworkError",
-        "callExpression": "mapNetworkError",
-        "sourcePath": "src/createSupabaseStorageAdapter.ts"
-      },
-      {
-        "fromSymbol": "remove",
-        "toSymbol": "invalidConfigFallback",
-        "callExpression": "invalidConfigFallback",
-        "sourcePath": "src/createSupabaseStorageAdapter.ts"
-      },
-      {
-        "fromSymbol": "remove",
-        "toSymbol": "resolveBucket",
-        "callExpression": "resolveBucket",
-        "sourcePath": "src/createSupabaseStorageAdapter.ts"
-      },
-      {
-        "fromSymbol": "remove",
-        "toSymbol": "resolvePath",
-        "callExpression": "resolvePath",
-        "sourcePath": "src/createSupabaseStorageAdapter.ts"
-      },
-      {
-        "fromSymbol": "remove",
-        "toSymbol": "mapProviderError",
-        "callExpression": "mapProviderError",
-        "sourcePath": "src/createSupabaseStorageAdapter.ts"
-      },
-      {
-        "fromSymbol": "remove",
-        "toSymbol": "mapNetworkError",
-        "callExpression": "mapNetworkError",
         "sourcePath": "src/createSupabaseStorageAdapter.ts"
       },
       {
         "fromSymbol": "getPublicUrl",
-        "toSymbol": "publicUrl",
-        "callExpression": "publicUrl",
+        "toSymbol": "resolveStorageContext",
+        "callExpression": "resolveStorageContext",
         "sourcePath": "src/createSupabaseStorageAdapter.ts"
       },
       {
-        "fromSymbol": "list",
-        "toSymbol": "invalidConfigFallback",
-        "callExpression": "invalidConfigFallback",
+        "fromSymbol": "getPublicUrl",
+        "toSymbol": "resolveStorageBucket",
+        "callExpression": "resolveStorageBucket",
         "sourcePath": "src/createSupabaseStorageAdapter.ts"
       },
       {
-        "fromSymbol": "list",
-        "toSymbol": "resolveBucket",
-        "callExpression": "resolveBucket",
+        "fromSymbol": "getPublicUrl",
+        "toSymbol": "resolveStoragePath",
+        "callExpression": "resolveStoragePath",
         "sourcePath": "src/createSupabaseStorageAdapter.ts"
       },
       {
-        "fromSymbol": "list",
+        "fromSymbol": "getPublicUrl",
+        "toSymbol": "extractStorageUrl",
+        "callExpression": "extractStorageUrl",
+        "sourcePath": "src/createSupabaseStorageAdapter.ts"
+      },
+      {
+        "fromSymbol": "getPublicUrl",
+        "toSymbol": "invalidUrlResponse",
+        "callExpression": "invalidUrlResponse",
+        "sourcePath": "src/createSupabaseStorageAdapter.ts"
+      },
+      {
+        "fromSymbol": "getPublicUrl",
+        "toSymbol": "mapNetworkError",
+        "callExpression": "mapNetworkError",
+        "sourcePath": "src/createSupabaseStorageAdapter.ts"
+      },
+      {
+        "fromSymbol": "invalidUrlResponse",
+        "toSymbol": "createStorageError",
+        "callExpression": "createStorageError",
+        "sourcePath": "src/createSupabaseStorageAdapter.ts"
+      },
+      {
+        "fromSymbol": "listAssets",
+        "toSymbol": "resolveStorageContext",
+        "callExpression": "resolveStorageContext",
+        "sourcePath": "src/createSupabaseStorageAdapter.ts"
+      },
+      {
+        "fromSymbol": "listAssets",
+        "toSymbol": "resolveStorageBucket",
+        "callExpression": "resolveStorageBucket",
+        "sourcePath": "src/createSupabaseStorageAdapter.ts"
+      },
+      {
+        "fromSymbol": "listAssets",
         "toSymbol": "normalizeListLimit",
         "callExpression": "normalizeListLimit",
         "sourcePath": "src/createSupabaseStorageAdapter.ts"
       },
       {
-        "fromSymbol": "list",
+        "fromSymbol": "listAssets",
         "toSymbol": "normalizeListCursor",
         "callExpression": "normalizeListCursor",
         "sourcePath": "src/createSupabaseStorageAdapter.ts"
       },
       {
-        "fromSymbol": "list",
+        "fromSymbol": "listAssets",
         "toSymbol": "normalizePrefix",
         "callExpression": "normalizePrefix",
         "sourcePath": "src/createSupabaseStorageAdapter.ts"
       },
       {
-        "fromSymbol": "list",
+        "fromSymbol": "listAssets",
         "toSymbol": "mapProviderError",
         "callExpression": "mapProviderError",
         "sourcePath": "src/createSupabaseStorageAdapter.ts"
@@ -1327,117 +1621,75 @@
         "sourcePath": "src/createSupabaseStorageAdapter.ts"
       },
       {
-        "fromSymbol": "list",
+        "fromSymbol": "listAssets",
         "toSymbol": "mapNetworkError",
         "callExpression": "mapNetworkError",
         "sourcePath": "src/createSupabaseStorageAdapter.ts"
       },
       {
-        "fromSymbol": "createSignedUrl",
-        "toSymbol": "invalidConfigFallback",
-        "callExpression": "invalidConfigFallback",
+        "fromSymbol": "removeAsset",
+        "toSymbol": "resolveStorageContext",
+        "callExpression": "resolveStorageContext",
         "sourcePath": "src/createSupabaseStorageAdapter.ts"
       },
       {
-        "fromSymbol": "createSignedUrl",
-        "toSymbol": "resolveBucket",
-        "callExpression": "resolveBucket",
+        "fromSymbol": "removeAsset",
+        "toSymbol": "resolveStorageBucket",
+        "callExpression": "resolveStorageBucket",
         "sourcePath": "src/createSupabaseStorageAdapter.ts"
       },
       {
-        "fromSymbol": "createSignedUrl",
-        "toSymbol": "resolvePath",
-        "callExpression": "resolvePath",
+        "fromSymbol": "removeAsset",
+        "toSymbol": "resolveStoragePath",
+        "callExpression": "resolveStoragePath",
         "sourcePath": "src/createSupabaseStorageAdapter.ts"
       },
       {
-        "fromSymbol": "createSignedUrl",
-        "toSymbol": "normalizeExpiry",
-        "callExpression": "normalizeExpiry",
-        "sourcePath": "src/createSupabaseStorageAdapter.ts"
-      },
-      {
-        "fromSymbol": "createSignedUrl",
+        "fromSymbol": "removeAsset",
         "toSymbol": "mapProviderError",
         "callExpression": "mapProviderError",
         "sourcePath": "src/createSupabaseStorageAdapter.ts"
       },
       {
-        "fromSymbol": "createSignedUrl",
-        "toSymbol": "extractUrl",
-        "callExpression": "extractUrl",
-        "sourcePath": "src/createSupabaseStorageAdapter.ts"
-      },
-      {
-        "fromSymbol": "createSignedUrl",
-        "toSymbol": "createStorageError",
-        "callExpression": "createStorageError",
-        "sourcePath": "src/createSupabaseStorageAdapter.ts"
-      },
-      {
-        "fromSymbol": "createSignedUrl",
+        "fromSymbol": "removeAsset",
         "toSymbol": "mapNetworkError",
         "callExpression": "mapNetworkError",
         "sourcePath": "src/createSupabaseStorageAdapter.ts"
       },
       {
-        "fromSymbol": "normalizeConfig",
-        "toSymbol": "createStorageError",
-        "callExpression": "createStorageError",
+        "fromSymbol": "uploadAsset",
+        "toSymbol": "resolveStorageContext",
+        "callExpression": "resolveStorageContext",
         "sourcePath": "src/createSupabaseStorageAdapter.ts"
       },
       {
-        "fromSymbol": "createSupabaseClient",
-        "toSymbol": "createClient",
-        "callExpression": "createClient",
+        "fromSymbol": "uploadAsset",
+        "toSymbol": "resolveStorageBucket",
+        "callExpression": "resolveStorageBucket",
         "sourcePath": "src/createSupabaseStorageAdapter.ts"
       },
       {
-        "fromSymbol": "normalizeListLimit",
-        "toSymbol": "createStorageError",
-        "callExpression": "createStorageError",
+        "fromSymbol": "uploadAsset",
+        "toSymbol": "resolveStoragePath",
+        "callExpression": "resolveStoragePath",
         "sourcePath": "src/createSupabaseStorageAdapter.ts"
       },
       {
-        "fromSymbol": "normalizeListCursor",
-        "toSymbol": "createStorageError",
-        "callExpression": "createStorageError",
+        "fromSymbol": "uploadAsset",
+        "toSymbol": "mapProviderError",
+        "callExpression": "mapProviderError",
         "sourcePath": "src/createSupabaseStorageAdapter.ts"
       },
       {
-        "fromSymbol": "normalizeExpiry",
-        "toSymbol": "createStorageError",
-        "callExpression": "createStorageError",
+        "fromSymbol": "uploadAsset",
+        "toSymbol": "getPublicUrl",
+        "callExpression": "getPublicUrl",
         "sourcePath": "src/createSupabaseStorageAdapter.ts"
       },
       {
-        "fromSymbol": "normalizeListedAsset",
-        "toSymbol": "isRecord",
-        "callExpression": "isRecord",
-        "sourcePath": "src/createSupabaseStorageAdapter.ts"
-      },
-      {
-        "fromSymbol": "normalizeListedAsset",
-        "toSymbol": "readString",
-        "callExpression": "readString",
-        "sourcePath": "src/createSupabaseStorageAdapter.ts"
-      },
-      {
-        "fromSymbol": "normalizeListedAsset",
-        "toSymbol": "readNumber",
-        "callExpression": "readNumber",
-        "sourcePath": "src/createSupabaseStorageAdapter.ts"
-      },
-      {
-        "fromSymbol": "extractUrl",
-        "toSymbol": "isRecord",
-        "callExpression": "isRecord",
-        "sourcePath": "src/createSupabaseStorageAdapter.ts"
-      },
-      {
-        "fromSymbol": "invalidConfigFallback",
-        "toSymbol": "createStorageError",
-        "callExpression": "createStorageError",
+        "fromSymbol": "uploadAsset",
+        "toSymbol": "mapNetworkError",
+        "callExpression": "mapNetworkError",
         "sourcePath": "src/createSupabaseStorageAdapter.ts"
       },
       {
@@ -1465,6 +1717,72 @@
         "sourcePath": "src/errors.ts"
       },
       {
+        "fromSymbol": "extractStorageUrl",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/storageNormalization.ts"
+      },
+      {
+        "fromSymbol": "invalidConfigFallback",
+        "toSymbol": "createStorageError",
+        "callExpression": "createStorageError",
+        "sourcePath": "src/storageNormalization.ts"
+      },
+      {
+        "fromSymbol": "normalizeExpiry",
+        "toSymbol": "createStorageError",
+        "callExpression": "createStorageError",
+        "sourcePath": "src/storageNormalization.ts"
+      },
+      {
+        "fromSymbol": "normalizeListCursor",
+        "toSymbol": "createStorageError",
+        "callExpression": "createStorageError",
+        "sourcePath": "src/storageNormalization.ts"
+      },
+      {
+        "fromSymbol": "normalizeListLimit",
+        "toSymbol": "createStorageError",
+        "callExpression": "createStorageError",
+        "sourcePath": "src/storageNormalization.ts"
+      },
+      {
+        "fromSymbol": "normalizeListedAsset",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/storageNormalization.ts"
+      },
+      {
+        "fromSymbol": "normalizeListedAsset",
+        "toSymbol": "readString",
+        "callExpression": "readString",
+        "sourcePath": "src/storageNormalization.ts"
+      },
+      {
+        "fromSymbol": "normalizeListedAsset",
+        "toSymbol": "readNumber",
+        "callExpression": "readNumber",
+        "sourcePath": "src/storageNormalization.ts"
+      },
+      {
+        "fromSymbol": "normalizeStorageConfig",
+        "toSymbol": "createStorageError",
+        "callExpression": "createStorageError",
+        "sourcePath": "src/storageNormalization.ts"
+      },
+      {
+        "fromSymbol": "resolveStorageBucket",
+        "toSymbol": "createStorageError",
+        "callExpression": "createStorageError",
+        "sourcePath": "src/storageNormalization.ts"
+      },
+      {
+        "fromSymbol": "resolveStoragePath",
+        "toSymbol": "createStorageError",
+        "callExpression": "createStorageError",
+        "sourcePath": "src/storageNormalization.ts"
+      },
+      {
         "fromSymbol": "createContractsSupabaseStorageAdapter",
         "toSymbol": "toMediaStorageAdapter",
         "callExpression": "toMediaStorageAdapter",
@@ -1478,14 +1796,14 @@
       },
       {
         "fromSymbol": "upload",
-        "toSymbol": "upload",
-        "callExpression": "adapter.upload",
+        "toSymbol": "uploadMedia",
+        "callExpression": "uploadMedia",
         "sourcePath": "src/contracts/toMediaStorageAdapter.ts"
       },
       {
         "fromSymbol": "remove",
-        "toSymbol": "remove",
-        "callExpression": "adapter.remove",
+        "toSymbol": "removeMedia",
+        "callExpression": "removeMedia",
         "sourcePath": "src/contracts/toMediaStorageAdapter.ts"
       },
       {
@@ -1496,6 +1814,18 @@
       },
       {
         "fromSymbol": "list",
+        "toSymbol": "listMedia",
+        "callExpression": "listMedia",
+        "sourcePath": "src/contracts/toMediaStorageAdapter.ts"
+      },
+      {
+        "fromSymbol": "resolve",
+        "toSymbol": "resolveMedia",
+        "callExpression": "resolveMedia",
+        "sourcePath": "src/contracts/toMediaStorageAdapter.ts"
+      },
+      {
+        "fromSymbol": "listMedia",
         "toSymbol": "list",
         "callExpression": "adapter.list",
         "sourcePath": "src/contracts/toMediaStorageAdapter.ts"
@@ -1507,15 +1837,33 @@
         "sourcePath": "src/contracts/toMediaStorageAdapter.ts"
       },
       {
-        "fromSymbol": "resolve",
+        "fromSymbol": "removeMedia",
+        "toSymbol": "remove",
+        "callExpression": "adapter.remove",
+        "sourcePath": "src/contracts/toMediaStorageAdapter.ts"
+      },
+      {
+        "fromSymbol": "resolveMedia",
+        "toSymbol": "resolvePublicMedia",
+        "callExpression": "resolvePublicMedia",
+        "sourcePath": "src/contracts/toMediaStorageAdapter.ts"
+      },
+      {
+        "fromSymbol": "resolveMedia",
+        "toSymbol": "createSignedUrl",
+        "callExpression": "adapter.createSignedUrl",
+        "sourcePath": "src/contracts/toMediaStorageAdapter.ts"
+      },
+      {
+        "fromSymbol": "resolvePublicMedia",
         "toSymbol": "publicUrl",
         "callExpression": "adapter.publicUrl",
         "sourcePath": "src/contracts/toMediaStorageAdapter.ts"
       },
       {
-        "fromSymbol": "resolve",
-        "toSymbol": "createSignedUrl",
-        "callExpression": "adapter.createSignedUrl",
+        "fromSymbol": "uploadMedia",
+        "toSymbol": "upload",
+        "callExpression": "adapter.upload",
         "sourcePath": "src/contracts/toMediaStorageAdapter.ts"
       }
     ],
@@ -1607,7 +1955,7 @@
       },
       {
         "fromSymbol": "UploadInput",
-        "toType": "Uint8Array",
+        "toType": "UploadBody",
         "sourcePath": "src/types.ts"
       },
       {

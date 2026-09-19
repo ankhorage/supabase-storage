@@ -3,9 +3,9 @@
 
 # @ankhorage/supabase-storage
 
-![license: MIT](././paradox/badges/license.svg) ![npm: v0.1.1](././paradox/badges/npm.svg) ![runtime: bun](././paradox/badges/runtime.svg) ![typescript: strict](././paradox/badges/typescript.svg) ![eslint: checked](././paradox/badges/eslint.svg) ![prettier: checked](././paradox/badges/prettier.svg) ![build: checked](././paradox/badges/build.svg) ![tests: checked](././paradox/badges/tests.svg) ![docs: paradox](././paradox/badges/docs.svg)
+![license: MIT](././paradox/badges/license.svg) ![npm: v0.2.13](././paradox/badges/npm.svg) ![runtime: bun](././paradox/badges/runtime.svg) ![typescript: strict](././paradox/badges/typescript.svg) ![eslint: checked](././paradox/badges/eslint.svg) ![prettier: checked](././paradox/badges/prettier.svg) ![build: checked](././paradox/badges/build.svg) ![tests: checked](././paradox/badges/tests.svg) ![docs: paradox](././paradox/badges/docs.svg)
 
-Type-safe Supabase Storage adapter for uploads, public URLs, and asset metadata.
+Type-safe Supabase Storage adapter for uploads, listing, URL resolution, and asset metadata.
 
 ## Generated documentation
 
@@ -16,37 +16,3 @@ Type-safe Supabase Storage adapter for uploads, public URLs, and asset metadata.
 - [Module relationships](././paradox/diagrams/module-relationships.mmd)
 - [Export graph](././paradox/diagrams/export-graph.mmd)
 - [createSupabaseStorageAdapter sequence](././paradox/diagrams/sequences/create-supabase-storage-adapter.mmd)
-
-## Architecture preview
-
-<details>
-<summary>Architecture overview</summary>
-
-```mermaid
-graph TD
-  package__ankhorage_supabase_storage["@ankhorage/supabase-storage"]
-  entrypoint_src_index_ts["src/index.ts"]
-  package__ankhorage_supabase_storage --> entrypoint_src_index_ts
-  module_src_contracts_createContractsSupabaseStorageAdapter_ts["src/contracts/createContractsSupabaseStorageAdapter.ts"]
-  package__ankhorage_supabase_storage -.-> module_src_contracts_createContractsSupabaseStorageAdapter_ts
-  module_src_contracts_createContractsSupabaseStorageAdapter_ts --> module_src_contracts_toMediaStorageAdapter_ts
-  module_src_contracts_createContractsSupabaseStorageAdapter_ts --> module_src_createSupabaseStorageAdapter_ts
-  module_src_contracts_createContractsSupabaseStorageAdapter_ts --> module_src_types_ts
-  module_src_contracts_index_ts["src/contracts/index.ts"]
-  package__ankhorage_supabase_storage -.-> module_src_contracts_index_ts
-  module_src_contracts_toMediaStorageAdapter_ts["src/contracts/toMediaStorageAdapter.ts"]
-  package__ankhorage_supabase_storage -.-> module_src_contracts_toMediaStorageAdapter_ts
-  module_src_contracts_toMediaStorageAdapter_ts --> module_src_types_ts
-  module_src_createSupabaseStorageAdapter_ts["src/createSupabaseStorageAdapter.ts"]
-  package__ankhorage_supabase_storage -.-> module_src_createSupabaseStorageAdapter_ts
-  module_src_createSupabaseStorageAdapter_ts --> module_src_errors_ts
-  module_src_createSupabaseStorageAdapter_ts --> module_src_types_ts
-  module_src_errors_ts["src/errors.ts"]
-  package__ankhorage_supabase_storage -.-> module_src_errors_ts
-  module_src_errors_ts --> module_src_types_ts
-  module_src_index_ts["src/index.ts"]
-  module_src_types_ts["src/types.ts"]
-  package__ankhorage_supabase_storage -.-> module_src_types_ts
-```
-
-</details>
