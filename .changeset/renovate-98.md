@@ -1,5 +1,0 @@
----
-'@ankhorage/supabase-storage': patch
----
-
-Update Ankhorage dependencies: `@ankhorage/contracts`.
