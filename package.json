@@ -25,7 +25,7 @@
     "typescript"
   ],
   "dependencies": {
-    "@supabase/supabase-js": "^2.105.3"
+    "@supabase/supabase-js": "^2.117.2"
   },
   "peerDependencies": {
     "@ankhorage/contracts": "^22.8.2"
