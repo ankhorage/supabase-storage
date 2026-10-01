@@ -1,5 +1,12 @@
 # @ankhorage/supabase-storage
 
+## 0.2.54
+
+### Patch Changes
+
+- c84c160: Update Renovate-managed workflows.
+- f641c48: Update dependencies: `@types/node`.
+
 ## 0.2.53
 
 ### Patch Changes
