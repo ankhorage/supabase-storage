@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.2.21",
+      "value": "v0.2.22",
       "color": "cb3837"
     },
     {
@@ -55,16 +55,31 @@
     },
     {
       "id": "docs",
-      "label": "docs",
-      "value": "paradox",
-      "color": "0f766e"
+      "label": "paradox",
+      "value": "warnings",
+      "color": "ca8a04"
     }
   ],
-  "usage": null,
-  "readmeUsageDescription": null,
-  "readmeUsage": [],
-  "readmeCli": null,
-  "readmeConfig": null,
+  "usage": {
+    "packageName": "@ankhorage/supabase-storage",
+    "command": "ankh supabase-storage --help"
+  },
+  "usageEntries": [],
+  "exampleCount": 0,
+  "findings": [
+    {
+      "ruleId": "documentation.public-function.description",
+      "severity": "warning",
+      "message": "Public function createSupabaseStorageAdapter has no Paradox description.",
+      "sourcePath": "src/createSupabaseStorageAdapter.ts",
+      "line": 47
+    }
+  ],
+  "readmeConfig": {
+    "language": "ts",
+    "code": "import { defineParadoxConfig } from '@ankhorage/paradox';\n\nexport default defineParadoxConfig({\n  mode: 'write',\n\n  package: {\n    root: '.',\n    entrypoints: ['src/index.ts'],\n  },\n\n  output: {\n    dir: './paradox',\n  },\n});",
+    "sourcePath": "paradox.config.ts"
+  },
   "config": null,
   "entrypoints": [
     "src/index.ts"
@@ -211,9 +226,11 @@
   "exports": [
     {
       "name": "AssetMetadata",
+      "title": null,
       "description": null,
       "isReadme": false,
-      "examples": [],
+      "see": [],
+      "security": [],
       "kind": "type",
       "modulePath": "src/types.ts",
       "sourceLocation": {
@@ -274,9 +291,11 @@
     },
     {
       "name": "createSupabaseStorageAdapter",
+      "title": null,
       "description": null,
       "isReadme": false,
-      "examples": [],
+      "see": [],
+      "security": [],
       "kind": "function",
       "modulePath": "src/createSupabaseStorageAdapter.ts",
       "sourceLocation": {
@@ -311,9 +330,11 @@
     },
     {
       "name": "ListedAssetMetadata",
+      "title": null,
       "description": null,
       "isReadme": false,
-      "examples": [],
+      "see": [],
+      "security": [],
       "kind": "type",
       "modulePath": "src/types.ts",
       "sourceLocation": {
@@ -381,9 +402,11 @@
     },
     {
       "name": "ListInput",
+      "title": null,
       "description": null,
       "isReadme": false,
-      "examples": [],
+      "see": [],
+      "security": [],
       "kind": "type",
       "modulePath": "src/types.ts",
       "sourceLocation": {
@@ -430,9 +453,11 @@
     },
     {
       "name": "ListResult",
+      "title": null,
       "description": null,
       "isReadme": false,
-      "examples": [],
+      "see": [],
+      "security": [],
       "kind": "type",
       "modulePath": "src/types.ts",
       "sourceLocation": {
@@ -467,9 +492,11 @@
     },
     {
       "name": "PublicUrlInput",
+      "title": null,
       "description": null,
       "isReadme": false,
-      "examples": [],
+      "see": [],
+      "security": [],
       "kind": "type",
       "modulePath": "src/types.ts",
       "sourceLocation": {
@@ -502,9 +529,11 @@
     },
     {
       "name": "PublicUrlResult",
+      "title": null,
       "description": null,
       "isReadme": false,
-      "examples": [],
+      "see": [],
+      "security": [],
       "kind": "type",
       "modulePath": "src/types.ts",
       "sourceLocation": {
@@ -532,9 +561,11 @@
     },
     {
       "name": "RemoveInput",
+      "title": null,
       "description": null,
       "isReadme": false,
-      "examples": [],
+      "see": [],
+      "security": [],
       "kind": "type",
       "modulePath": "src/types.ts",
       "sourceLocation": {
@@ -567,9 +598,11 @@
     },
     {
       "name": "RemoveResult",
+      "title": null,
       "description": null,
       "isReadme": false,
-      "examples": [],
+      "see": [],
+      "security": [],
       "kind": "type",
       "modulePath": "src/types.ts",
       "sourceLocation": {
@@ -595,9 +628,11 @@
     },
     {
       "name": "SignedUrlInput",
+      "title": null,
       "description": null,
       "isReadme": false,
-      "examples": [],
+      "see": [],
+      "security": [],
       "kind": "type",
       "modulePath": "src/types.ts",
       "sourceLocation": {
@@ -637,9 +672,11 @@
     },
     {
       "name": "SignedUrlResult",
+      "title": null,
       "description": null,
       "isReadme": false,
-      "examples": [],
+      "see": [],
+      "security": [],
       "kind": "type",
       "modulePath": "src/types.ts",
       "sourceLocation": {
@@ -665,9 +702,11 @@
     },
     {
       "name": "StorageAdapterError",
+      "title": null,
       "description": null,
       "isReadme": false,
-      "examples": [],
+      "see": [],
+      "security": [],
       "kind": "type",
       "modulePath": "src/types.ts",
       "sourceLocation": {
@@ -709,9 +748,11 @@
     },
     {
       "name": "StorageAdapterErrorCode",
+      "title": null,
       "description": null,
       "isReadme": false,
-      "examples": [],
+      "see": [],
+      "security": [],
       "kind": "unknown",
       "modulePath": "src/types.ts",
       "sourceLocation": {
@@ -729,9 +770,11 @@
     },
     {
       "name": "StorageResult",
+      "title": null,
       "description": null,
       "isReadme": false,
-      "examples": [],
+      "see": [],
+      "security": [],
       "kind": "unknown",
       "modulePath": "src/types.ts",
       "sourceLocation": {
@@ -749,9 +792,11 @@
     },
     {
       "name": "SupabaseStorageAdapter",
+      "title": null,
       "description": null,
       "isReadme": false,
-      "examples": [],
+      "see": [],
+      "security": [],
       "kind": "type",
       "modulePath": "src/types.ts",
       "sourceLocation": {
@@ -824,9 +869,11 @@
     },
     {
       "name": "SupabaseStorageAdapterConfig",
+      "title": null,
       "description": null,
       "isReadme": false,
-      "examples": [],
+      "see": [],
+      "security": [],
       "kind": "type",
       "modulePath": "src/types.ts",
       "sourceLocation": {
@@ -866,9 +913,11 @@
     },
     {
       "name": "UploadBody",
+      "title": null,
       "description": null,
       "isReadme": false,
-      "examples": [],
+      "see": [],
+      "security": [],
       "kind": "unknown",
       "modulePath": "src/types.ts",
       "sourceLocation": {
@@ -886,9 +935,11 @@
     },
     {
       "name": "UploadInput",
+      "title": null,
       "description": null,
       "isReadme": false,
-      "examples": [],
+      "see": [],
+      "security": [],
       "kind": "type",
       "modulePath": "src/types.ts",
       "sourceLocation": {
@@ -951,9 +1002,11 @@
     },
     {
       "name": "UploadResult",
+      "title": null,
       "description": null,
       "isReadme": false,
-      "examples": [],
+      "see": [],
+      "security": [],
       "kind": "type",
       "modulePath": "src/types.ts",
       "sourceLocation": {
@@ -985,6 +1038,8 @@
     {
       "name": "createContractsSupabaseStorageAdapter",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/contracts/createContractsSupabaseStorageAdapter.ts",
         "line": 7,
@@ -994,6 +1049,8 @@
     {
       "name": "toMediaStorageAdapter",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/contracts/toMediaStorageAdapter.ts",
         "line": 16,
@@ -1003,6 +1060,8 @@
     {
       "name": "listMedia",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/contracts/toMediaStorageAdapter.ts",
         "line": 29,
@@ -1012,6 +1071,8 @@
     {
       "name": "removeMedia",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/contracts/toMediaStorageAdapter.ts",
         "line": 49,
@@ -1021,6 +1082,8 @@
     {
       "name": "resolveMedia",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/contracts/toMediaStorageAdapter.ts",
         "line": 54,
@@ -1030,6 +1093,8 @@
     {
       "name": "resolvePublicMedia",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/contracts/toMediaStorageAdapter.ts",
         "line": 80,
@@ -1039,6 +1104,8 @@
     {
       "name": "toStorageObjectMetadata",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/contracts/toMediaStorageAdapter.ts",
         "line": 100,
@@ -1048,6 +1115,8 @@
     {
       "name": "uploadMedia",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/contracts/toMediaStorageAdapter.ts",
         "line": 113,
@@ -1057,6 +1126,8 @@
     {
       "name": "createSupabaseClientStub",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/createSupabaseStorageAdapter.testSupport.ts",
         "line": 52,
@@ -1066,6 +1137,8 @@
     {
       "name": "mockSupabaseModule",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/createSupabaseStorageAdapter.testSupport.ts",
         "line": 102,
@@ -1075,6 +1148,8 @@
     {
       "name": "createSupabaseStorageAdapter",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/createSupabaseStorageAdapter.ts",
         "line": 47,
@@ -1084,6 +1159,8 @@
     {
       "name": "createSignedAssetUrl",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/createSupabaseStorageAdapter.ts",
         "line": 61,
@@ -1093,6 +1170,8 @@
     {
       "name": "createStorageContext",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/createSupabaseStorageAdapter.ts",
         "line": 90,
@@ -1102,6 +1181,8 @@
     {
       "name": "createSupabaseClient",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/createSupabaseStorageAdapter.ts",
         "line": 102,
@@ -1111,6 +1192,8 @@
     {
       "name": "resolveStorageContext",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/createSupabaseStorageAdapter.ts",
         "line": 108,
@@ -1120,6 +1203,8 @@
     {
       "name": "getPublicUrl",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/createSupabaseStorageAdapter.ts",
         "line": 118,
@@ -1129,6 +1214,8 @@
     {
       "name": "invalidUrlResponse",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/createSupabaseStorageAdapter.ts",
         "line": 141,
@@ -1138,6 +1225,8 @@
     {
       "name": "invalidUrlResponse",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/createSupabaseStorageAdapter.ts",
         "line": 142,
@@ -1147,6 +1236,8 @@
     {
       "name": "invalidUrlResponse",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/createSupabaseStorageAdapter.ts",
         "line": 143,
@@ -1156,6 +1247,8 @@
     {
       "name": "listAssets",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/createSupabaseStorageAdapter.ts",
         "line": 155,
@@ -1165,6 +1258,8 @@
     {
       "name": "removeAsset",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/createSupabaseStorageAdapter.ts",
         "line": 185,
@@ -1174,6 +1269,8 @@
     {
       "name": "uploadAsset",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/createSupabaseStorageAdapter.ts",
         "line": 204,
@@ -1183,6 +1280,8 @@
     {
       "name": "createStorageError",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/errors.ts",
         "line": 3,
@@ -1192,6 +1291,8 @@
     {
       "name": "mapNetworkError",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/errors.ts",
         "line": 11,
@@ -1201,6 +1302,8 @@
     {
       "name": "mapProviderError",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/errors.ts",
         "line": 15,
@@ -1210,6 +1313,8 @@
     {
       "name": "extractErrorMessage",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/errors.ts",
         "line": 20,
@@ -1219,6 +1324,8 @@
     {
       "name": "isRecord",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/errors.ts",
         "line": 48,
@@ -1228,6 +1335,8 @@
     {
       "name": "extractStorageUrl",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/storageNormalization.ts",
         "line": 12,
@@ -1237,6 +1346,8 @@
     {
       "name": "invalidConfigFallback",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/storageNormalization.ts",
         "line": 25,
@@ -1246,6 +1357,8 @@
     {
       "name": "normalizeExpiry",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/storageNormalization.ts",
         "line": 29,
@@ -1255,6 +1368,8 @@
     {
       "name": "normalizeListCursor",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/storageNormalization.ts",
         "line": 41,
@@ -1264,6 +1379,8 @@
     {
       "name": "normalizeListLimit",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/storageNormalization.ts",
         "line": 52,
@@ -1273,6 +1390,8 @@
     {
       "name": "normalizeListedAsset",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/storageNormalization.ts",
         "line": 65,
@@ -1282,6 +1401,8 @@
     {
       "name": "normalizePrefix",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/storageNormalization.ts",
         "line": 85,
@@ -1291,6 +1412,8 @@
     {
       "name": "normalizeStorageConfig",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/storageNormalization.ts",
         "line": 89,
@@ -1300,6 +1423,8 @@
     {
       "name": "resolveStorageBucket",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/storageNormalization.ts",
         "line": 126,
@@ -1309,6 +1434,8 @@
     {
       "name": "resolveStoragePath",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/storageNormalization.ts",
         "line": 139,
@@ -1318,6 +1445,8 @@
     {
       "name": "isRecord",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/storageNormalization.ts",
         "line": 149,
@@ -1327,6 +1456,8 @@
     {
       "name": "readNumber",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/storageNormalization.ts",
         "line": 153,
@@ -1336,6 +1467,8 @@
     {
       "name": "readString",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/storageNormalization.ts",
         "line": 157,

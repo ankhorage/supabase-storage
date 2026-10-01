@@ -1,9 +1,11 @@
 [
   {
     "name": "AssetMetadata",
+    "title": null,
     "description": null,
     "isReadme": false,
-    "examples": [],
+    "see": [],
+    "security": [],
     "kind": "type",
     "modulePath": "src/types.ts",
     "sourceLocation": {
@@ -64,9 +66,11 @@
   },
   {
     "name": "createSupabaseStorageAdapter",
+    "title": null,
     "description": null,
     "isReadme": false,
-    "examples": [],
+    "see": [],
+    "security": [],
     "kind": "function",
     "modulePath": "src/createSupabaseStorageAdapter.ts",
     "sourceLocation": {
@@ -101,9 +105,11 @@
   },
   {
     "name": "ListedAssetMetadata",
+    "title": null,
     "description": null,
     "isReadme": false,
-    "examples": [],
+    "see": [],
+    "security": [],
     "kind": "type",
     "modulePath": "src/types.ts",
     "sourceLocation": {
@@ -171,9 +177,11 @@
   },
   {
     "name": "ListInput",
+    "title": null,
     "description": null,
     "isReadme": false,
-    "examples": [],
+    "see": [],
+    "security": [],
     "kind": "type",
     "modulePath": "src/types.ts",
     "sourceLocation": {
@@ -220,9 +228,11 @@
   },
   {
     "name": "ListResult",
+    "title": null,
     "description": null,
     "isReadme": false,
-    "examples": [],
+    "see": [],
+    "security": [],
     "kind": "type",
     "modulePath": "src/types.ts",
     "sourceLocation": {
@@ -257,9 +267,11 @@
   },
   {
     "name": "PublicUrlInput",
+    "title": null,
     "description": null,
     "isReadme": false,
-    "examples": [],
+    "see": [],
+    "security": [],
     "kind": "type",
     "modulePath": "src/types.ts",
     "sourceLocation": {
@@ -292,9 +304,11 @@
   },
   {
     "name": "PublicUrlResult",
+    "title": null,
     "description": null,
     "isReadme": false,
-    "examples": [],
+    "see": [],
+    "security": [],
     "kind": "type",
     "modulePath": "src/types.ts",
     "sourceLocation": {
@@ -322,9 +336,11 @@
   },
   {
     "name": "RemoveInput",
+    "title": null,
     "description": null,
     "isReadme": false,
-    "examples": [],
+    "see": [],
+    "security": [],
     "kind": "type",
     "modulePath": "src/types.ts",
     "sourceLocation": {
@@ -357,9 +373,11 @@
   },
   {
     "name": "RemoveResult",
+    "title": null,
     "description": null,
     "isReadme": false,
-    "examples": [],
+    "see": [],
+    "security": [],
     "kind": "type",
     "modulePath": "src/types.ts",
     "sourceLocation": {
@@ -385,9 +403,11 @@
   },
   {
     "name": "SignedUrlInput",
+    "title": null,
     "description": null,
     "isReadme": false,
-    "examples": [],
+    "see": [],
+    "security": [],
     "kind": "type",
     "modulePath": "src/types.ts",
     "sourceLocation": {
@@ -427,9 +447,11 @@
   },
   {
     "name": "SignedUrlResult",
+    "title": null,
     "description": null,
     "isReadme": false,
-    "examples": [],
+    "see": [],
+    "security": [],
     "kind": "type",
     "modulePath": "src/types.ts",
     "sourceLocation": {
@@ -455,9 +477,11 @@
   },
   {
     "name": "StorageAdapterError",
+    "title": null,
     "description": null,
     "isReadme": false,
-    "examples": [],
+    "see": [],
+    "security": [],
     "kind": "type",
     "modulePath": "src/types.ts",
     "sourceLocation": {
@@ -499,9 +523,11 @@
   },
   {
     "name": "StorageAdapterErrorCode",
+    "title": null,
     "description": null,
     "isReadme": false,
-    "examples": [],
+    "see": [],
+    "security": [],
     "kind": "unknown",
     "modulePath": "src/types.ts",
     "sourceLocation": {
@@ -519,9 +545,11 @@
   },
   {
     "name": "StorageResult",
+    "title": null,
     "description": null,
     "isReadme": false,
-    "examples": [],
+    "see": [],
+    "security": [],
     "kind": "unknown",
     "modulePath": "src/types.ts",
     "sourceLocation": {
@@ -539,9 +567,11 @@
   },
   {
     "name": "SupabaseStorageAdapter",
+    "title": null,
     "description": null,
     "isReadme": false,
-    "examples": [],
+    "see": [],
+    "security": [],
     "kind": "type",
     "modulePath": "src/types.ts",
     "sourceLocation": {
@@ -614,9 +644,11 @@
   },
   {
     "name": "SupabaseStorageAdapterConfig",
+    "title": null,
     "description": null,
     "isReadme": false,
-    "examples": [],
+    "see": [],
+    "security": [],
     "kind": "type",
     "modulePath": "src/types.ts",
     "sourceLocation": {
@@ -656,9 +688,11 @@
   },
   {
     "name": "UploadBody",
+    "title": null,
     "description": null,
     "isReadme": false,
-    "examples": [],
+    "see": [],
+    "security": [],
     "kind": "unknown",
     "modulePath": "src/types.ts",
     "sourceLocation": {
@@ -676,9 +710,11 @@
   },
   {
     "name": "UploadInput",
+    "title": null,
     "description": null,
     "isReadme": false,
-    "examples": [],
+    "see": [],
+    "security": [],
     "kind": "type",
     "modulePath": "src/types.ts",
     "sourceLocation": {
@@ -741,9 +777,11 @@
   },
   {
     "name": "UploadResult",
+    "title": null,
     "description": null,
     "isReadme": false,
-    "examples": [],
+    "see": [],
+    "security": [],
     "kind": "type",
     "modulePath": "src/types.ts",
     "sourceLocation": {

@@ -1,5 +1,15 @@
 # @ankhorage/supabase-storage
 
+## 0.2.22
+
+### Patch Changes
+
+- fa25d5d: Keep repository-only Renovate configuration out of published documentation.
+- ec93015: Update dependencies from Renovate pull request #133.
+- ed9dc3f: Update dependencies from Renovate pull request #151.
+- e185b49: Update dependencies from Renovate pull request #153.
+- 688b1e0: Update Ankhorage dependencies: `@ankhorage/contracts`.
+
 ## 0.2.21
 
 ### Patch Changes

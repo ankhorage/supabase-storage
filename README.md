@@ -3,9 +3,30 @@
 
 # @ankhorage/supabase-storage
 
-![license: MIT](././paradox/badges/license.svg) ![npm: v0.2.21](././paradox/badges/npm.svg) ![runtime: bun](././paradox/badges/runtime.svg) ![typescript: strict](././paradox/badges/typescript.svg) ![eslint: checked](././paradox/badges/eslint.svg) ![prettier: checked](././paradox/badges/prettier.svg) ![build: checked](././paradox/badges/build.svg) ![tests: checked](././paradox/badges/tests.svg) ![docs: paradox](././paradox/badges/docs.svg)
+![license: MIT](././paradox/badges/license.svg) ![npm: v0.2.22](././paradox/badges/npm.svg) ![runtime: bun](././paradox/badges/runtime.svg) ![typescript: strict](././paradox/badges/typescript.svg) ![eslint: checked](././paradox/badges/eslint.svg) ![prettier: checked](././paradox/badges/prettier.svg) ![build: checked](././paradox/badges/build.svg) ![tests: checked](././paradox/badges/tests.svg) ![paradox: warnings](././paradox/badges/docs.svg)
 
 Type-safe Supabase Storage adapter for uploads, listing, URL resolution, and asset metadata.
+
+## Configuration
+
+### Example
+
+```ts
+import { defineParadoxConfig } from '@ankhorage/paradox';
+
+export default defineParadoxConfig({
+  mode: 'write',
+
+  package: {
+    root: '.',
+    entrypoints: ['src/index.ts'],
+  },
+
+  output: {
+    dir: './paradox',
+  },
+});
+```
 
 ## Generated documentation
 
