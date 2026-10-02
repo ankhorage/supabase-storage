@@ -75,9 +75,9 @@
     "knip:check": "ankhorage-knip"
   },
   "devDependencies": {
-    "@ankhorage/contracts": "^22.8.57",
+    "@ankhorage/contracts": "^22.8.58",
     "@ankhorage/devtools": "^2.0.61",
-    "@ankhorage/paradox": "^0.2.20",
+    "@ankhorage/paradox": "^0.2.21",
     "@types/bun": "^1.4.2",
     "@types/node": "^26.6.4",
     "typescript": "^6.0.3"
