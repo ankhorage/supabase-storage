@@ -1,5 +1,11 @@
 # @ankhorage/supabase-storage
 
+## 0.2.79
+
+### Patch Changes
+
+- 771c9f4: Update Renovate-managed workflows.
+
 ## 0.2.78
 
 ### Patch Changes
