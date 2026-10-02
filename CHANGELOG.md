@@ -1,5 +1,11 @@
 # @ankhorage/supabase-storage
 
+## 0.2.66
+
+### Patch Changes
+
+- 8517806: Update dependencies: `@ankhorage/contracts`, `@ankhorage/paradox`.
+
 ## 0.2.65
 
 ### Patch Changes
