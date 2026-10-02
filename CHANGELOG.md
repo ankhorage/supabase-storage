@@ -1,5 +1,11 @@
 # @ankhorage/supabase-storage
 
+## 0.2.91
+
+### Patch Changes
+
+- 963e021: Update Renovate-managed workflows.
+
 ## 0.2.90
 
 ### Patch Changes
