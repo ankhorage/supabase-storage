@@ -1,5 +1,12 @@
 # @ankhorage/supabase-storage
 
+## 0.2.82
+
+### Patch Changes
+
+- 04cf952: Update Renovate-managed workflows.
+- 5e64098: Update dependencies: `@ankhorage/devtools`.
+
 ## 0.2.81
 
 ### Patch Changes
