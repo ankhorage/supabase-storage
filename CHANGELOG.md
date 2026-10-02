@@ -1,5 +1,11 @@
 # @ankhorage/supabase-storage
 
+## 0.2.69
+
+### Patch Changes
+
+- d3bca8b: Update dependencies: `@ankhorage/contracts`.
+
 ## 0.2.68
 
 ### Patch Changes
