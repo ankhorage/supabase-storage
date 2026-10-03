@@ -1,5 +1,11 @@
 # @ankhorage/supabase-storage
 
+## 0.2.108
+
+### Patch Changes
+
+- eedbe06: Update dependencies: `@ankhorage/devtools`.
+
 ## 0.2.107
 
 ### Patch Changes
