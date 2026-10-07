@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.2.108",
+      "value": "v0.2.109",
       "color": "cb3837"
     },
     {
@@ -70,7 +70,7 @@
     {
       "ruleId": "documentation.public-function.description",
       "severity": "warning",
-      "message": "Public function createSupabaseStorageAdapter has no Paradox description.",
+      "message": "Exported function createSupabaseStorageAdapter has no documentation description.",
       "sourcePath": "src/createSupabaseStorageAdapter.ts",
       "line": 47
     }

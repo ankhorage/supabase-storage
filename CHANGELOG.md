@@ -1,5 +1,11 @@
 # @ankhorage/supabase-storage
 
+## 0.2.109
+
+### Patch Changes
+
+- 7c24156: Update dependencies: `@supabase/supabase-js`.
+
 ## 0.2.108
 
 ### Patch Changes
